@@ -45,9 +45,9 @@ import java.util.Map;
  */
 public class BasicMDCAdapter implements MDCAdapter {
 
-    private InheritableThreadLocal<Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<Map<String, String>>() {
+    private InheritableThreadLocal<@Nullable Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<@Nullable Map<String, String>>() {
         @Override
-        protected @Nullable Map<String, String> childValue(Map<String, String> parentValue) {
+        protected @Nullable Map<String, String> childValue(@Nullable Map<String, String> parentValue) {
             if (parentValue == null) {
                 return null;
             }
