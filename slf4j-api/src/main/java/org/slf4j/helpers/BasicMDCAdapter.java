@@ -118,7 +118,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      *
      * @return the keys in the MDC
      */
-    public Set<String> getKeys() {
+    public @Nullable Set<String> getKeys() {
         Map<String, String> map = inheritableThreadLocal.get();
         if (map != null) {
             return map.keySet();
@@ -132,7 +132,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      * Returned value may be null.
      *
      */
-    public Map<String, String> getCopyOfContextMap() {
+    public @Nullable Map<String, String> getCopyOfContextMap() {
         Map<String, String> oldMap = inheritableThreadLocal.get();
         if (oldMap != null) {
             return new HashMap<String, String>(oldMap);

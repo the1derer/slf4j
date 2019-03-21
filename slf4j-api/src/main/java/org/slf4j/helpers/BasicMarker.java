@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Marker;
 
 /**
@@ -132,7 +133,7 @@ public class BasicMarker implements Marker {
     private static String CLOSE = " ]";
     private static String SEP = ", ";
 
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
