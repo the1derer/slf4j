@@ -24,7 +24,7 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         this.level = level;
     }
 
-    public Marker getMarker() {
+    public @Nullable Marker getMarker() {
         return marker;
     }
 
@@ -56,7 +56,7 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         this.message = message;
     }
 
-    public Object[] getArgumentArray() {
+    public @Nullable Object @Nullable [] getArgumentArray() {
         return argArray;
     }
 
@@ -80,7 +80,7 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         this.threadName = threadName;
     }
 
-    public Throwable getThrowable() {
+    public @Nullable Throwable getThrowable() {
         return throwable;
     }
 
