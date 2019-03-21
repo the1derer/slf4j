@@ -28,6 +28,8 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 // contributors: lizongbo: proposed special treatment of array parameter values
 // Joern Huxhorn: pointed out double[] omission, suggested deep array copy
 /**
@@ -152,7 +154,7 @@ final public class MessageFormatter {
     }
 
 
-    static final Throwable getThrowableCandidate(Object[] argArray) {
+    static final @Nullable Throwable getThrowableCandidate(Object[] argArray) {
         if (argArray == null || argArray.length == 0) {
             return null;
         }
@@ -165,7 +167,7 @@ final public class MessageFormatter {
     }
 
     final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray) {
-        Throwable throwableCandidate = getThrowableCandidate(argArray);
+        @Nullable Throwable throwableCandidate = getThrowableCandidate(argArray);
         Object[] args = argArray;
         if (throwableCandidate != null) {
             args = trimmedCopy(argArray);
@@ -183,7 +185,7 @@ final public class MessageFormatter {
         return trimmed;
     }
 
-    final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray, Throwable throwable) {
+    final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray,@Nullable Throwable throwable) {
 
         if (messagePattern == null) {
             return new FormattingTuple(null, argArray, throwable);
