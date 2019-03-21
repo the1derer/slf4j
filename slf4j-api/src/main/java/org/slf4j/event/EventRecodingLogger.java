@@ -2,6 +2,7 @@ package org.slf4j.event;
 
 import java.util.Queue;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.helpers.SubstituteLogger;
@@ -22,11 +23,11 @@ public class EventRecodingLogger implements Logger {
         return name;
     }
 
-    private void recordEvent(Level level, String msg, Object[] args, Throwable throwable) {
+    private void recordEvent(Level level, String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) {
         recordEvent(level, null, msg, args, throwable);
     }
 
-    private void recordEvent(Level level, Marker marker, String msg, Object[] args, Throwable throwable) {
+    private void recordEvent(Level level,@Nullable Marker marker, String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) {
         // System.out.println("recording logger:"+name+", msg:"+msg);
         SubstituteLoggingEvent loggingEvent = new SubstituteLoggingEvent();
         loggingEvent.setTimeStamp(System.currentTimeMillis());

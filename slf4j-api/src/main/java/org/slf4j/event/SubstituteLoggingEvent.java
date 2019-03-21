@@ -1,19 +1,20 @@
 package org.slf4j.event;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Marker;
 import org.slf4j.helpers.SubstituteLogger;
 
 public class SubstituteLoggingEvent implements LoggingEvent {
 
     Level level;
-    Marker marker;
+    @Nullable Marker marker;
     String loggerName;
     SubstituteLogger logger;
     String threadName;
     String message;
-    Object[] argArray;
+    @Nullable Object @Nullable [] argArray;
     long timeStamp;
-    Throwable throwable;
+    @Nullable Throwable throwable;
 
     public Level getLevel() {
         return level;
@@ -27,7 +28,7 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         return marker;
     }
 
-    public void setMarker(Marker marker) {
+    public void setMarker(@Nullable Marker marker) {
         this.marker = marker;
     }
 
@@ -59,7 +60,7 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         return argArray;
     }
 
-    public void setArgumentArray(Object[] argArray) {
+    public void setArgumentArray(@Nullable Object @Nullable [] argArray) {
         this.argArray = argArray;
     }
 
@@ -83,7 +84,7 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         return throwable;
     }
 
-    public void setThrowable(Throwable throwable) {
+    public void setThrowable(@Nullable Throwable throwable) {
         this.throwable = throwable;
     }
 }
