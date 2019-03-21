@@ -24,6 +24,8 @@
  */
 package org.slf4j.helpers;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * An internal utility class.
  *
@@ -36,7 +38,7 @@ public final class Util {
     private Util() {
     }
 
-    public static String safeGetSystemProperty(String key) {
+    public static @Nullable String safeGetSystemProperty(String key) {
         if (key == null)
             throw new IllegalArgumentException("null input");
 
@@ -68,10 +70,10 @@ public final class Util {
         }
     }
 
-    private static ClassContextSecurityManager SECURITY_MANAGER;
+    private static @Nullable ClassContextSecurityManager SECURITY_MANAGER; // Can be initialized as null and value is set by getSecurityManager()
     private static boolean SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED = false;
 
-    private static ClassContextSecurityManager getSecurityManager() {
+    private static @Nullable ClassContextSecurityManager getSecurityManager() {
         if (SECURITY_MANAGER != null)
             return SECURITY_MANAGER;
         else if (SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED)
@@ -83,7 +85,7 @@ public final class Util {
         }
     }
 
-    private static ClassContextSecurityManager safeCreateSecurityManager() {
+    private static @Nullable ClassContextSecurityManager safeCreateSecurityManager() {
         try {
             return new ClassContextSecurityManager();
         } catch (java.lang.SecurityException sm) {
@@ -96,7 +98,7 @@ public final class Util {
      *
      * @return the name of the class which called the invoking method.
      */
-    public static Class<?> getCallingClass() {
+    public static @Nullable Class<?> getCallingClass() {
         ClassContextSecurityManager securityManager = getSecurityManager();
         if (securityManager == null)
             return null;
