@@ -35,6 +35,7 @@ import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.slf4j.event.SubstituteLoggingEvent;
 import org.slf4j.helpers.NOPServiceProvider;
 import org.slf4j.helpers.SubstituteServiceProvider;
@@ -98,7 +99,7 @@ public final class LoggerFactory {
 
     static boolean DETECT_LOGGER_NAME_MISMATCH = Util.safeGetBooleanSystemProperty(DETECT_LOGGER_NAME_MISMATCH_PROPERTY);
 
-    static volatile SLF4JServiceProvider PROVIDER;
+    static volatile @MonotonicNonNull SLF4JServiceProvider PROVIDER;// can be null value, is set by performInitialization() using bind()
 
     private static List<SLF4JServiceProvider> findServiceProviders() {
         ServiceLoader<SLF4JServiceProvider> serviceLoader = ServiceLoader.load(SLF4JServiceProvider.class);
@@ -292,6 +293,7 @@ public final class LoggerFactory {
 
     private final static void versionSanityCheck() {
         try {
+            @SuppressWarnings("nullness") // versionSanityCheck is called only after successful initialization of PROVIDER by bind()
             String requested = PROVIDER.getRequesteApiVersion();
 
             boolean match = false;
@@ -411,6 +413,11 @@ public final class LoggerFactory {
      * @return provider in use
      * @since 1.8.0
      */
+
+    // [ERROR] slf4j/slf4j-api/src/main/java/org/slf4j/LoggerFactory.java:[432,20] [return.type.incompatible] incompatible types in return.
+    // type of expression: @Initialized @MonotonicNonNull SLF4JServiceProvider
+    // method return type: @Initialized @NonNull SLF4JServiceProvider
+    @SuppressWarnings("nullness") //PROVIDER is always initialized by using performInitialization() or is already initialised so return type should be kept @NonNull
     static SLF4JServiceProvider getProvider() {
         if (INITIALIZATION_STATE == UNINITIALIZED) {
             synchronized (LoggerFactory.class) {

@@ -121,7 +121,8 @@ public class BasicMDCAdapter implements MDCAdapter {
     public @Nullable Set<String> getKeys() { // can return null as seen in line 126
         Map<String, String> map = inheritableThreadLocal.get();
         if (map != null) {
-            return map.keySet();
+            Set<String> s=map.keySet();// to remove default @KeyFor("map")
+            return s;
         } else {
             return null;
         }
