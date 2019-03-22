@@ -4,7 +4,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Marker;
 import org.slf4j.helpers.SubstituteLogger;
 
-public class SubstituteLoggingEvent implements LoggingEvent {
+public class SubstituteLoggingEvent implements LoggingEvent { // various fields can can contain null value as seen in EventRecodingLogger
 
     Level level;
     @Nullable Marker marker;

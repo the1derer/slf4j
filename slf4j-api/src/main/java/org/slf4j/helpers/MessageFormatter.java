@@ -154,7 +154,7 @@ final public class MessageFormatter {
     }
 
 
-    static final @Nullable Throwable getThrowableCandidate(Object[] argArray) {
+    static final @Nullable Throwable getThrowableCandidate(Object[] argArray) { // can return null as seen in line 166
         if (argArray == null || argArray.length == 0) {
             return null;
         }
@@ -226,13 +226,13 @@ final public class MessageFormatter {
                         // itself escaped: "abc x:\\{}"
                         // we have to consume one backward slash
                         sbuf.append(messagePattern, i, j - 1);
-                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[],@Nullable Object>());
+                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[],@Nullable Object>()); // hash map allows both null value and key
                         i = j + 2;
                     }
                 } else {
                     // normal case
                     sbuf.append(messagePattern, i, j);
-                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[],@Nullable Object>());
+                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[],@Nullable Object>());  // hash map allows both null value and key
                     i = j + 2;
                 }
             }

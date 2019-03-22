@@ -45,9 +45,9 @@ import java.util.Map;
  */
 public class BasicMDCAdapter implements MDCAdapter {
 
-    private InheritableThreadLocal<@Nullable Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<@Nullable Map<String, String>>() {
+    private InheritableThreadLocal<@Nullable Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<@Nullable Map<String, String>>() { // this annonymus class & (Annoated)JDK allows null
         @Override
-        protected @Nullable Map<String, String> childValue(@Nullable Map<String, String> parentValue) {
+        protected @Nullable Map<String, String> childValue(@Nullable Map<String, String> parentValue) { // Can return null as in line 52
             if (parentValue == null) {
                 return null;
             }
@@ -82,7 +82,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     /**
      * Get the context identified by the <code>key</code> parameter.
      */
-    public @Nullable String get(String key) {
+    public @Nullable String get(String key) { // can return null as in line 90
         Map<String, String> map = inheritableThreadLocal.get();
         if ((map != null) && (key != null)) {
             return map.get(key);
@@ -118,7 +118,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      *
      * @return the keys in the MDC
      */
-    public @Nullable Set<String> getKeys() {
+    public @Nullable Set<String> getKeys() { // can return null as seen in line 126
         Map<String, String> map = inheritableThreadLocal.get();
         if (map != null) {
             return map.keySet();
@@ -132,7 +132,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      * Returned value may be null.
      *
      */
-    public @Nullable Map<String, String> getCopyOfContextMap() {
+    public @Nullable Map<String, String> getCopyOfContextMap() { // can return null as seen in line 140
         Map<String, String> oldMap = inheritableThreadLocal.get();
         if (oldMap != null) {
             return new HashMap<String, String>(oldMap);
