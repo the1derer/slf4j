@@ -1,0 +1,276 @@
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/Marker.java:[132,34] [override.param.invalid] Incompatible parameter type for o.
+  Method
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Marker this, @Initialized @NonNull Object p0) in org.slf4j.Marker
+  cannot override
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0) in java.lang.Object
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/NamedLoggerBase.java:[41,10] [initialization.fields.uninitialized] the constructor does not initialize fields: name
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/Util.java:[33,14] [initialization.fields.uninitialized] the constructor does not initialize fields: SECURITY_MANAGER
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/Util.java:[49,16] [return.type.incompatible] incompatible types in return.
+  type of expression: @Initialized @Nullable String
+  method return type: @Initialized @NonNull String
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/Util.java:[78,20] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull ClassContextSecurityManager
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/Util.java:[90,20] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull ClassContextSecurityManager
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/Util.java:[102,20] [return.type.incompatible] incompatible types in return.
+  type of expression: @FBCBottom @Nullable null
+  method return type: @Initialized @NonNull Class<?[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]>
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[26,28] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Marker
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[49,39] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[49,45] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[53,64] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[57,71] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[61,53] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[65,39] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[73,47] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[73,53] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[78,72] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[82,79] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[86,60] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[91,47] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[99,39] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[99,45] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[103,64] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[108,71] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[113,53] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[117,39] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[125,47] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[125,53] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[129,72] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[133,79] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[137,61] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[141,47] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[149,38] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[149,44] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[153,63] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[157,70] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[161,52] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[165,38] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[173,46] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[173,52] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[177,71] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[181,78] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[185,60] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[189,46] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[198,38] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[198,44] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[202,63] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[207,70] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[211,52] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[215,38] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[223,46] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[223,52] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[227,63] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[231,78] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[236,60] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[240,46] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[248,39] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[248,45] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[252,64] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[257,71] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[262,53] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[267,39] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[275,47] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[275,53] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[280,72] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[285,79] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[289,61] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/EventRecodingLogger.java:[293,47] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/SubstituteLogger.java:[58,12] [initialization.fields.uninitialized] the constructor does not initialize fields: _delegate, delegateEventAware, logMethodCache, eventRecodingLogger
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/SubstituteLogger.java:[309,34] [override.param.invalid] Incompatible parameter type for o.
+  Method
+    @Initialized @NonNull boolean equals(@Initialized @NonNull SubstituteLogger this, @Initialized @NonNull Object p0) in org.slf4j.helpers.SubstituteLogger
+  cannot override
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0) in java.lang.Object
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/event/SubstituteLoggingEvent.java:[6,8] [initialization.fields.uninitialized] the constructor does not initialize fields: level, marker, loggerName, logger, threadName, message, argArray, throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/FormattingTuple.java:[34,62] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull String
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/FormattingTuple.java:[41,23] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object @Initialized @NonNull []
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/FormattingTuple.java:[41,29] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/MessageFormatter.java:[157,20] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/MessageFormatter.java:[164,16] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull Throwable
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/MessageFormatter.java:[189,40] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull String
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/MessageFormatter.java:[311,28] [argument.type.incompatible] incompatible types in argument.
+  found   : null
+  required: @Initialized @NonNull Object
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[47,39] [type.argument.type.incompatible] incompatible types in type argument.
+  found   : @Initialized @NonNull Map<@Initialized @NonNull String, @Initialized @NonNull String>
+  required: [extends @Initialized @Nullable Object super @Initialized @Nullable null]
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[47,112] [type.argument.type.incompatible] incompatible types in type argument.
+  found   : @Initialized @NonNull Map<@Initialized @NonNull String, @Initialized @NonNull String>
+  required: [extends @Initialized @Nullable Object super @Initialized @Nullable null]
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[51,24] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull Map<@Initialized @NonNull String, @Initialized @NonNull String>
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[87,27] [return.type.incompatible] incompatible types in return.
+  type of expression: @Initialized @Nullable String
+  method return type: @Initialized @NonNull String
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[89,20] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull String
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[123,30] [return.type.incompatible] incompatible types in return.
+  type of expression: Set<@KeyFor("map") String>
+  method return type: Set<String>
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[125,20] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull Set<@Initialized @NonNull String>
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMDCAdapter.java:[139,20] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull Map<@Initialized @NonNull String, @Initialized @NonNull String>
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/BasicMarker.java:[135,34] [override.param.invalid] Incompatible parameter type for obj.
+  Method
+    @Initialized @NonNull boolean equals(@Initialized @NonNull BasicMarker this, @Initialized @NonNull Object p0) in org.slf4j.helpers.BasicMarker
+  cannot override
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0) in java.lang.Object
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/LoggerFactory.java:[66,14] [initialization.fields.uninitialized] the constructor does not initialize fields: PROVIDER
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/NOPMDCAdapter.java:[46,16] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull String
+[ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/helpers/NOPMDCAdapter.java:[56,16] [return.type.incompatible] incompatible types in return.
+  type of expression: null
+  method return type: @Initialized @NonNull Map<@Initialized @NonNull String, @Initialized @NonNull String>
+[INFO] 90 errors 
