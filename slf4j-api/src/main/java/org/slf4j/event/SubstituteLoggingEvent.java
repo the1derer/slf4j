@@ -1,17 +1,22 @@
 package org.slf4j.event;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Marker;
 import org.slf4j.helpers.SubstituteLogger;
 
-public class SubstituteLoggingEvent implements LoggingEvent { // various fields can can contain null value as seen in EventRecodingLogger
+// Very Poor design choices used here,as all of fields are left uninitialized and we can't use @RequireNonNull on getter methods inherited from LoggingEvent without causing precondition errors in Logging event
+// and we should not change behaviour of SuperClass.
+@SuppressWarnings("nullness")
+public class SubstituteLoggingEvent implements LoggingEvent { 
 
-    Level level;
-    @Nullable Marker marker;
-    String loggerName;
-    SubstituteLogger logger;
-    String threadName;
-    String message;
+    @MonotonicNonNull Level level;
+    @Nullable Marker marker; // various fields can can contain null value as seen in EventRecodingLogger
+    @MonotonicNonNull String loggerName;
+    @MonotonicNonNull SubstituteLogger logger;
+    @MonotonicNonNull String threadName;
+    @MonotonicNonNull String message;
     @Nullable Object @Nullable [] argArray;
     long timeStamp;
     @Nullable Throwable throwable;
