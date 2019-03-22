@@ -28,7 +28,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Queue;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.event.EventRecodingLogger;
@@ -48,10 +51,10 @@ import org.slf4j.event.SubstituteLoggingEvent;
 public class SubstituteLogger implements Logger {
 
     private final String name;
-    private volatile Logger _delegate;
-    private Boolean delegateEventAware;
-    private Method logMethodCache;
-    private EventRecodingLogger eventRecodingLogger;
+    private volatile @MonotonicNonNull Logger _delegate;
+    private @MonotonicNonNull Boolean delegateEventAware;
+    private @MonotonicNonNull Method logMethodCache;
+    private @MonotonicNonNull EventRecodingLogger eventRecodingLogger; // Initialized by getEventRecordingLogger()
     private Queue<SubstituteLoggingEvent> eventQueue;
 
     public final boolean createdPostInitialization;
@@ -352,10 +355,12 @@ public class SubstituteLogger implements Logger {
      * Typically called after the {@link org.slf4j.LoggerFactory} initialization phase is completed.
      * @param delegate
      */
+    @EnsuresNonNull("_delegate")
     public void setDelegate(Logger delegate) {
         this._delegate = delegate;
     }
 
+    @EnsuresNonNull("delegateEventAware")
     public boolean isDelegateEventAware() {
         if (delegateEventAware != null)
             return delegateEventAware;
@@ -369,6 +374,7 @@ public class SubstituteLogger implements Logger {
         return delegateEventAware;
     }
 
+    @SuppressWarnings("nullness") // isDelegateEventAware() will ensure NonNull value of logMethodCache
     public void log(LoggingEvent event) {
         if (isDelegateEventAware()) {
             try {
