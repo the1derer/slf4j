@@ -51,7 +51,8 @@ import org.slf4j.event.SubstituteLoggingEvent;
 public class SubstituteLogger implements Logger {
 
     private final String name;
-    private volatile @MonotonicNonNull Logger _delegate;
+    @SuppressWarnings("nullness") // Poor design choice is preventing use of @RequireNonNull causing contracts.precondition.not.satisfied in LoggerFactory.java which can't be solved without changing behavoiur.
+    private volatile Logger _delegate; // _delegate can be null and can be checker using isDelegateNull()
     private @MonotonicNonNull Boolean delegateEventAware;
     private @MonotonicNonNull Method logMethodCache;
     private @MonotonicNonNull EventRecodingLogger eventRecodingLogger; // Initialized by getEventRecordingLogger()
@@ -360,6 +361,7 @@ public class SubstituteLogger implements Logger {
         this._delegate = delegate;
     }
 
+    // @RequiresNonNull("_delegate")
     @EnsuresNonNull("delegateEventAware")
     public boolean isDelegateEventAware() {
         if (delegateEventAware != null)
