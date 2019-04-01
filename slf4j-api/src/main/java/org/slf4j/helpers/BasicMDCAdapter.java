@@ -24,6 +24,7 @@
  */
 package org.slf4j.helpers;
 
+import org.checkerframework.checker.nullness.qual.KeyFor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.spi.MDCAdapter;
 
@@ -118,11 +119,10 @@ public class BasicMDCAdapter implements MDCAdapter {
      *
      * @return the keys in the MDC
      */
-    public @Nullable Set<String> getKeys() { // can return null as seen in line 126
+    public @Nullable Set<@KeyFor("map") String> getKeys() {
         Map<String, String> map = inheritableThreadLocal.get();
         if (map != null) {
-            Set<String> s=map.keySet();// to remove default @KeyFor("map")
-            return s;
+            return map.keySet();
         } else {
             return null;
         }

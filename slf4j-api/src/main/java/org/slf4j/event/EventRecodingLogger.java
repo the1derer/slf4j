@@ -23,11 +23,11 @@ public class EventRecodingLogger implements Logger {
         return name;
     }
 
-    private void recordEvent(Level level, String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) { // null can be passed as argument as seen in trace()
+    private void recordEvent(Level level, String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) {
         recordEvent(level, null, msg, args, throwable);
     }
 
-    private void recordEvent(Level level,@Nullable Marker marker, String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) { //Null can be passed as argument as in trace()
+    private void recordEvent(Level level, @Nullable Marker marker, String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) {
         // System.out.println("recording logger:"+name+", msg:"+msg);
         SubstituteLoggingEvent loggingEvent = new SubstituteLoggingEvent();
         loggingEvent.setTimeStamp(System.currentTimeMillis());
