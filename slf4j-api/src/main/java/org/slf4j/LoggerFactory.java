@@ -297,7 +297,7 @@ public final class LoggerFactory {
 
     private final static void versionSanityCheck() {
         try {
-            @SuppressWarnings("nullness") // versionSanityCheck is called only after successful initialization of PROVIDER by bind()
+            @SuppressWarnings("nullness") // versionSanityCheck() is called only after successful initialization of PROVIDER by bind()
             String requested = PROVIDER.getRequesteApiVersion();
 
             boolean match = false;
