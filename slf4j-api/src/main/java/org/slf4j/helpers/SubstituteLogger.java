@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.util.Queue;
 
 import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.EnsuresNonNullIf;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.checker.nullness.qual.RequiresNonNull;
@@ -51,8 +52,7 @@ import org.slf4j.event.SubstituteLoggingEvent;
 public class SubstituteLogger implements Logger {
 
     private final String name;
-    @SuppressWarnings("nullness") // Poor design choice is preventing use of @RequireNonNull causing contracts.precondition.not.satisfied in LoggerFactory.java which can't be solved without changing behavoiur.
-    private volatile Logger _delegate; // _delegate can be null and can be checker using isDelegateNull()
+    private volatile @MonotonicNonNull Logger _delegate;
     private @MonotonicNonNull Boolean delegateEventAware;
     private @MonotonicNonNull Method logMethodCache;
     private @MonotonicNonNull EventRecodingLogger eventRecodingLogger; // Initialized by getEventRecordingLogger()
@@ -361,8 +361,7 @@ public class SubstituteLogger implements Logger {
         this._delegate = delegate;
     }
 
-    // @RequiresNonNull("_delegate")
-    @EnsuresNonNull("delegateEventAware")
+    @RequiresNonNull("_delegate")
     public boolean isDelegateEventAware() {
         if (delegateEventAware != null)
             return delegateEventAware;
@@ -376,7 +375,8 @@ public class SubstituteLogger implements Logger {
         return delegateEventAware;
     }
 
-    @SuppressWarnings("nullness") // isDelegateEventAware() will ensure NonNull value of logMethodCache
+    @SuppressWarnings("nullness") // Suppressing null derefernce warnings of logMethodCache as isDelegateEventAware() will ensure execusion of statement only if it is NonNull
+    @RequiresNonNull({"_delegate"})
     public void log(LoggingEvent event) {
         if (isDelegateEventAware()) {
             try {
@@ -388,7 +388,7 @@ public class SubstituteLogger implements Logger {
         }
     }
 
-
+    @EnsuresNonNullIf(expression="this._delegate", result=false)
     public boolean isDelegateNull() {
         return _delegate == null;
     }

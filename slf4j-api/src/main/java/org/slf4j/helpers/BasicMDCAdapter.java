@@ -48,7 +48,7 @@ public class BasicMDCAdapter implements MDCAdapter {
 
     private InheritableThreadLocal<@Nullable Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<@Nullable Map<String, String>>() { // this annonymus class & (Annoated)JDK allows null
         @Override
-        protected @Nullable Map<String, String> childValue(@Nullable Map<String, String> parentValue) { // Can return null as in line 52
+        protected @Nullable Map<String, String> childValue(@Nullable Map<String, String> parentValue) {
             if (parentValue == null) {
                 return null;
             }
@@ -119,10 +119,11 @@ public class BasicMDCAdapter implements MDCAdapter {
      *
      * @return the keys in the MDC
      */
-    public @Nullable Set<@KeyFor("map") String> getKeys() {
+    public @Nullable Set<String> getKeys() {
         Map<String, String> map = inheritableThreadLocal.get();
         if (map != null) {
-            return map.keySet();
+            Set s=map.keySet();
+            return s;
         } else {
             return null;
         }

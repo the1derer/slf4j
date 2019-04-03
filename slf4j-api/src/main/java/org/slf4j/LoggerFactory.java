@@ -248,6 +248,10 @@ public final class LoggerFactory {
         }
     }
 
+    // [ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/LoggerFactory.java:[252,90] 
+    // [contracts.precondition.not.satisfied] the called method 'event.getLogger().isDelegateEventAware()' has a precondition 
+    // 'event.getLogger()._delegate' that is not satisfied
+    @SuppressWarnings("nullness") // Code is unsafe but in here only call to this method is preceded by repalySingleEvent() which will throws IllegalStateException if _delegate is null 
     private static void emitReplayOrSubstituionWarning(SubstituteLoggingEvent event, int queueSize) {
         if (event.getLogger().isDelegateEventAware()) {
             emitReplayWarning(queueSize);

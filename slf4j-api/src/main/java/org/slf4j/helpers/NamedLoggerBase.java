@@ -42,8 +42,11 @@ abstract class NamedLoggerBase implements Logger, Serializable {
 
     private static final long serialVersionUID = 7535258609338176893L;
 
-    @SuppressWarnings("nullness") // All subclasses should and have initialized name
     protected String name;
+
+    protected NamedLoggerBase(String name) {
+        this.name=name;
+    }
 
     public String getName() {
         return name;
