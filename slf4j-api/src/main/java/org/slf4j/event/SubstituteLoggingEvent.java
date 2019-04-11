@@ -7,13 +7,13 @@ import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.Marker;
 import org.slf4j.helpers.SubstituteLogger;
 
-// Very Poor design choices used here,as all of fields are left uninitialized and we can't use @RequireNonNull on getter methods inherited from LoggingEvent without causing precondition errors in Logging event
-// and we should not change behaviour of SuperClass.
+// Very Poor design choices used here,as all of fields are left uninitialized and we can't use @RequireNonNull on getter methods inherited from LoggingEvent, 
+// without causing precondition errors in Logging event and we should not change behaviour of SuperClass.
 @SuppressWarnings("nullness")
 public class SubstituteLoggingEvent implements LoggingEvent { 
 
     @MonotonicNonNull Level level;
-    @Nullable Marker marker; // various fields can can contain null value as seen in EventRecodingLogger
+    @Nullable Marker marker;
     @MonotonicNonNull String loggerName;
     @MonotonicNonNull SubstituteLogger logger;
     @MonotonicNonNull String threadName;
@@ -22,10 +22,12 @@ public class SubstituteLoggingEvent implements LoggingEvent {
     long timeStamp;
     @Nullable Throwable throwable;
 
+    @RequiresNonNull("level")
     public Level getLevel() {
         return level;
     }
 
+    @EnsuresNonNull("level")
     public void setLevel(Level level) {
         this.level = level;
     }
@@ -38,10 +40,12 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         this.marker = marker;
     }
 
+    @RequiresNonNull("loggerName")
     public String getLoggerName() {
         return loggerName;
     }
 
+    @EnsuresNonNull("loggerName")
     public void setLoggerName(String loggerName) {
         this.loggerName = loggerName;
     }
@@ -50,14 +54,17 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         return logger;
     }
 
+    @EnsuresNonNull("logger")
     public void setLogger(SubstituteLogger logger) {
         this.logger = logger;
     }
 
+    @RequiresNonNull("message")
     public String getMessage() {
         return message;
     }
 
+    @EnsuresNonNull("message")
     public void setMessage(String message) {
         this.message = message;
     }
@@ -78,10 +85,12 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         this.timeStamp = timeStamp;
     }
 
+    @RequiresNonNull("threadName")
     public String getThreadName() {
         return threadName;
     }
 
+    @EnsuresNonNull("threadName")
     public void setThreadName(String threadName) {
         this.threadName = threadName;
     }
