@@ -122,7 +122,7 @@ final public class MessageFormatter {
      *          The argument to be substituted in place of the formatting anchor
      * @return The formatted message
      */
-    final public static FormattingTuple format(String messagePattern, Object arg) {
+    final public static FormattingTuple format(@Nullable String messagePattern,@Nullable Object arg) {
         return arrayFormat(messagePattern, new Object[] { arg });
     }
 
@@ -149,12 +149,12 @@ final public class MessageFormatter {
      *          anchor
      * @return The formatted message
      */
-    final public static FormattingTuple format(final String messagePattern, Object arg1, Object arg2) {
+    final public static FormattingTuple format(final String messagePattern, @Nullable Object arg1, @Nullable Object arg2) {
         return arrayFormat(messagePattern, new Object[] { arg1, arg2 });
     }
 
 
-    static final @Nullable Throwable getThrowableCandidate(Object[] argArray) { // can return null as seen in line 166
+    static final @Nullable Throwable getThrowableCandidate(@Nullable Object @Nullable[] argArray) { // can return null as seen in line 166
         if (argArray == null || argArray.length == 0) {
             return null;
         }
@@ -166,16 +166,16 @@ final public class MessageFormatter {
         return null;
     }
 
-    final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray) {
+    final public static FormattingTuple arrayFormat(final @Nullable String messagePattern, final @Nullable Object @Nullable[] argArray) {
         @Nullable Throwable throwableCandidate = getThrowableCandidate(argArray); // returns null if (argArray == null || argArray.length == 0) 
-        Object[] args = argArray;
+        @Nullable Object[] args = argArray;
         if (throwableCandidate != null) {
             args = trimmedCopy(argArray);
         }
         return arrayFormat(messagePattern, args, throwableCandidate);
     }
 
-    private static Object[] trimmedCopy(Object[] argArray) {
+    private static Object[] trimmedCopy(@Nullable Object @Nullable[] argArray) {
         if (argArray == null || argArray.length == 0) {
             throw new IllegalStateException("non-sensical empty or null argument array");
         }
@@ -185,7 +185,7 @@ final public class MessageFormatter {
         return trimmed;
     }
 
-    final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray,@Nullable Throwable throwable) { // throwable can be null
+    final public static FormattingTuple arrayFormat(final @Nullable String messagePattern, final @Nullable Object @Nullable[] argArray,@Nullable Throwable throwable) { // throwable can be null
 
         if (messagePattern == null) {
             return new FormattingTuple(null, argArray, throwable);
@@ -264,7 +264,7 @@ final public class MessageFormatter {
     }
 
     // special treatment of array values was suggested by 'lizongbo'
-    private static void deeplyAppendParameter(StringBuilder sbuf, Object o, Map<Object[],@Nullable Object> seenMap) { // all calls on this method pass HashMap which allows null value
+    private static void deeplyAppendParameter(StringBuilder sbuf, @Nullable Object o, Map<Object[],@Nullable Object> seenMap) { // all calls on this method pass HashMap which allows null value
         if (o == null) {
             sbuf.append("null");
             return;

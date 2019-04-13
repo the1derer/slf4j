@@ -26,6 +26,7 @@ package org.slf4j.helpers;
 
 import java.util.Arrays;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -41,7 +42,7 @@ public class MessageFormatterTest {
     Integer[] ia0 = new Integer[] { i1, i2, i3 };
     Integer[] ia1 = new Integer[] { new Integer(10), new Integer(20), new Integer(30) };
 
-    String result;
+    @Nullable String result;
 
     @Test
     public void testNull() {
