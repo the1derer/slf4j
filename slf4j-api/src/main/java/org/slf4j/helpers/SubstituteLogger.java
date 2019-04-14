@@ -56,11 +56,11 @@ public class SubstituteLogger implements Logger {
     private @MonotonicNonNull Boolean delegateEventAware;
     private @MonotonicNonNull Method logMethodCache;
     private @MonotonicNonNull EventRecodingLogger eventRecodingLogger; // Initialized by getEventRecordingLogger()
-    private Queue<SubstituteLoggingEvent> eventQueue;
+    private @Nullable Queue<SubstituteLoggingEvent> eventQueue;
 
     public final boolean createdPostInitialization;
     
-    public SubstituteLogger(String name, Queue<SubstituteLoggingEvent> eventQueue, boolean createdPostInitialization) {
+    public SubstituteLogger(String name, @Nullable Queue<SubstituteLoggingEvent> eventQueue, boolean createdPostInitialization) {
         this.name = name;
         this.eventQueue = eventQueue;
         this.createdPostInitialization = createdPostInitialization;

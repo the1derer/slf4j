@@ -24,7 +24,6 @@
  */
 package org.slf4j.helpers;
 
-import org.checkerframework.checker.nullness.qual.KeyFor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.spi.MDCAdapter;
 
@@ -134,7 +133,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      * Returned value may be null.
      *
      */
-    public @Nullable Map<String, String> getCopyOfContextMap() { // can return null as seen in line 140
+    public @Nullable Map<String, String> getCopyOfContextMap() {
         Map<String, String> oldMap = inheritableThreadLocal.get();
         if (oldMap != null) {
             return new HashMap<String, String>(oldMap);
