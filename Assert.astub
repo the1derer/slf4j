@@ -38,7 +38,7 @@ public class Assert {
      * okay)
      * @param condition condition to be checked
      */
-    static public void assertTrue(String message, boolean condition) {
+    static public void assertTrue(@Nullable String message, boolean condition) {
         if (!condition) {
             fail(message);
         }
@@ -62,7 +62,7 @@ public class Assert {
      * okay)
      * @param condition condition to be checked
      */
-    static public void assertFalse(String message, boolean condition) {
+    static public void assertFalse(@Nullable String message, boolean condition) {
         assertTrue(message, !condition);
     }
 
