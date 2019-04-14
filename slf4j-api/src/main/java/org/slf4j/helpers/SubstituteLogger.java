@@ -345,6 +345,7 @@ public class SubstituteLogger implements Logger {
         }
     }
 
+    @SuppressWarnings("nullness")
     private Logger getEventRecordingLogger() {
         if (eventRecodingLogger == null) {
             eventRecodingLogger = new EventRecodingLogger(this, eventQueue);
