@@ -345,7 +345,10 @@ public class SubstituteLogger implements Logger {
         }
     }
 
-    @SuppressWarnings("nullness")
+    // [ERROR]/slf4j-api/src/main/java/org/slf4j/helpers/SubstituteLogger.java:[351,65] [argument.type.incompatible] incompatible types in argument.
+    // found   : @Initialized @Nullable Queue<@Initialized @NonNull SubstituteLoggingEvent>
+    // required: @Initialized @NonNull Queue<@Initialized @NonNull SubstituteLoggingEvent>
+    @SuppressWarnings("nullness") // Not able to solve this error
     private Logger getEventRecordingLogger() {
         if (eventRecodingLogger == null) {
             eventRecodingLogger = new EventRecodingLogger(this, eventQueue);

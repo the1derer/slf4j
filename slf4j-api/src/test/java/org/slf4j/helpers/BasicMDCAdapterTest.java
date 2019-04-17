@@ -66,6 +66,7 @@ public class BasicMDCAdapterTest {
     }
 
     @Test
+    @SuppressWarnings("nullness") // False Positive- As without using mdc.clear(), mdc.getCopyOfContextMap() will never be null
     public void testClearingMDC() {
         mdc.put("testKey", "testValue");
         assertFalse(mdc.getCopyOfContextMap().isEmpty());
@@ -74,6 +75,7 @@ public class BasicMDCAdapterTest {
     }
 
     @Test
+    @SuppressWarnings("nullness") // False Positive- As without using mdc.clear(), mdc.getCopyOfContextMap() will never be null
     public void testGetCopyOfContextMapFromMDC() {
         mdc.put("testKey", "testValue");
         Map<String, String> copy = mdc.getCopyOfContextMap();
