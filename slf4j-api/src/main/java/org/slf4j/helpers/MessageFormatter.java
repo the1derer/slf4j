@@ -154,7 +154,7 @@ final public class MessageFormatter {
     }
 
 
-    static final @Nullable Throwable getThrowableCandidate(@Nullable Object @Nullable[] argArray) { // can return null as seen in line 166
+    static final @Nullable Throwable getThrowableCandidate(@Nullable Object @Nullable[] argArray) {
         if (argArray == null || argArray.length == 0) {
             return null;
         }

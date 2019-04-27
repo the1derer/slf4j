@@ -99,7 +99,7 @@ public final class LoggerFactory {
 
     static boolean DETECT_LOGGER_NAME_MISMATCH = Util.safeGetBooleanSystemProperty(DETECT_LOGGER_NAME_MISMATCH_PROPERTY);
 
-    static volatile @MonotonicNonNull SLF4JServiceProvider PROVIDER;// can be null value, is set by performInitialization() using bind()
+    static volatile @MonotonicNonNull SLF4JServiceProvider PROVIDER;
 
     private static List<SLF4JServiceProvider> findServiceProviders() {
         ServiceLoader<SLF4JServiceProvider> serviceLoader = ServiceLoader.load(SLF4JServiceProvider.class);

@@ -82,7 +82,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     /**
      * Get the context identified by the <code>key</code> parameter.
      */
-    public @Nullable String get(String key) { // can return null as in line 90
+    public @Nullable String get(String key) {
         Map<String, String> map = inheritableThreadLocal.get();
         if ((map != null) && (key != null)) {
             return map.get(key);

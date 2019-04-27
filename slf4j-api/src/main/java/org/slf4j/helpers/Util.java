@@ -38,7 +38,7 @@ public final class Util {
     private Util() {
     }
 
-    public static @Nullable String safeGetSystemProperty(String key) { // can return null
+    public static @Nullable String safeGetSystemProperty(String key) {
         if (key == null)
             throw new IllegalArgumentException("null input");
 
@@ -70,10 +70,10 @@ public final class Util {
         }
     }
 
-    private static @Nullable ClassContextSecurityManager SECURITY_MANAGER; // Can be initialized as null and value is set by getSecurityManager()
+    private static @Nullable ClassContextSecurityManager SECURITY_MANAGER;
     private static boolean SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED = false;
 
-    private static @Nullable ClassContextSecurityManager getSecurityManager() { // can return null
+    private static @Nullable ClassContextSecurityManager getSecurityManager() {
         if (SECURITY_MANAGER != null)
             return SECURITY_MANAGER;
         else if (SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED)
@@ -85,7 +85,7 @@ public final class Util {
         }
     }
 
-    private static @Nullable ClassContextSecurityManager safeCreateSecurityManager() { // can return null
+    private static @Nullable ClassContextSecurityManager safeCreateSecurityManager() {
         try {
             return new ClassContextSecurityManager();
         } catch (java.lang.SecurityException sm) {
@@ -98,7 +98,7 @@ public final class Util {
      *
      * @return the name of the class which called the invoking method.
      */
-    public static @Nullable Class<?> getCallingClass() { // can return null
+    public static @Nullable Class<?> getCallingClass() {
         ClassContextSecurityManager securityManager = getSecurityManager();
         if (securityManager == null)
             return null;

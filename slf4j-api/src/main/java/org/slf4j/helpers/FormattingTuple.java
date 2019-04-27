@@ -39,25 +39,25 @@ public class FormattingTuple {
     private @Nullable Throwable throwable;
     private @Nullable Object @Nullable [] argArray;
 
-    public FormattingTuple(@Nullable String message) { // null can be passed as argument as seen in line 36
+    public FormattingTuple(@Nullable String message) {
         this(message, null, null);
     }
 
-    public FormattingTuple(@Nullable String message,@Nullable Object @Nullable [] argArray,@Nullable Throwable throwable) { // null can be passed as argument as seen in line 42
+    public FormattingTuple(@Nullable String message, @Nullable Object @Nullable [] argArray, @Nullable Throwable throwable) {
         this.message = message;
         this.throwable = throwable;
         this.argArray = argArray;
     }
 
-    public @Nullable String getMessage() { // can have null value
+    public @Nullable String getMessage() { 
         return message;
     }
 
-    public @Nullable Object @Nullable [] getArgArray() { // can contain null value
+    public @Nullable Object @Nullable [] getArgArray() {
         return argArray;
     }
 
-    public @Nullable Throwable getThrowable() { // can contain null value
+    public @Nullable Throwable getThrowable() {
         return throwable;
     }
 
