@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 
 // contributors: lizongbo: proposed special treatment of array parameter values
 // Joern Huxhorn: pointed out double[] omission, suggested deep array copy
@@ -175,7 +176,7 @@ final public class MessageFormatter {
         return arrayFormat(messagePattern, args, throwableCandidate);
     }
 
-    private static Object[] trimmedCopy(@Nullable Object @Nullable[] argArray) {
+    private static @PolyNull Object[] trimmedCopy(@PolyNull Object @Nullable[] argArray) {
         if (argArray == null || argArray.length == 0) {
             throw new IllegalStateException("non-sensical empty or null argument array");
         }
