@@ -392,6 +392,7 @@ public class SubstituteLogger implements Logger {
         }
     }
 
+
     @EnsuresNonNullIf(expression="this._delegate", result=false)
     public boolean isDelegateNull() {
         return _delegate == null;
