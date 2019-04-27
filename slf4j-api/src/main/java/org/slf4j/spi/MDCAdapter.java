@@ -54,7 +54,7 @@ public interface MDCAdapter {
      * 
      * @return the string value identified by the <code>key</code> parameter.
      */
-    public @Nullable String get(String key); // implementation can return null as seen in NOPMDCAdapter.java
+    public @Nullable String get(String key);
 
     /**
      * Remove the the context identified by the <code>key</code> parameter. 
@@ -78,7 +78,7 @@ public interface MDCAdapter {
      * @return A copy of the current thread's context map. May be null.
      * @since 1.5.1
      */
-    public @Nullable Map<String, String> getCopyOfContextMap(); // implementation can return null as seen in NOPMDCAdapter.java
+    public @Nullable Map<String, String> getCopyOfContextMap();
 
     /**
      * Set the current thread's context map by first clearing any existing 

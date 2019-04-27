@@ -167,7 +167,7 @@ public class MDC {
      * @throws IllegalArgumentException
      *           in case the "key" parameter is null
      */
-    public static @Nullable String get(String key) throws IllegalArgumentException { // mdcAdapter.get(key) can return null value
+    public static @Nullable String get(String key) throws IllegalArgumentException {
         if (key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
@@ -216,7 +216,7 @@ public class MDC {
      * @return A copy of the current thread's context map. May be null.
      * @since 1.5.1
      */
-    public static @Nullable Map<String, String> getCopyOfContextMap() { // mdcAdapter.getCopyOfContextMap() can return null value
+    public static @Nullable Map<String, String> getCopyOfContextMap() {
         if (mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }

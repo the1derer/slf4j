@@ -8,7 +8,7 @@ import org.slf4j.Marker;
  * @author ceki
  * @since 1.7.15
  */
-public interface LoggingEvent { // various implementation can allow null return of methods as seen in SubstituteLoggingEvent
+public interface LoggingEvent {
 
     Level getLevel();
 

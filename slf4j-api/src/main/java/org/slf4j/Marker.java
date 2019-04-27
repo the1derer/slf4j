@@ -27,7 +27,7 @@ package org.slf4j;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Markers are named objects used to enrich log statements. Conforming logging
@@ -131,7 +131,7 @@ public interface Marker extends Serializable {
      *
      * @since 1.5.1
      */
-    public boolean equals(@Nullable Object o); // null can be passed as argument
+    public boolean equals(@Nullable Object o);
 
     /**
      * Compute the hash code based on the name of this marker.
