@@ -142,7 +142,7 @@ public class Assert {
      * @param expected expected value
      * @param actual the value to check against <code>expected</code>
      */
-    static public void assertEquals(@Nullable Object expected,@Nullable Object actual) {
+    static public void assertEquals(@Nullable Object expected, @Nullable Object actual) {
         assertEquals(null, expected, actual);
     }
 

@@ -122,7 +122,7 @@ final public class MessageFormatter {
      *          The argument to be substituted in place of the formatting anchor
      * @return The formatted message
      */
-    final public static FormattingTuple format(@Nullable String messagePattern,@Nullable Object arg) {
+    final public static FormattingTuple format(@Nullable String messagePattern, @Nullable Object arg) {
         return arrayFormat(messagePattern, new Object[] { arg });
     }
 
@@ -185,7 +185,7 @@ final public class MessageFormatter {
         return trimmed;
     }
 
-    final public static FormattingTuple arrayFormat(final @Nullable String messagePattern, final @Nullable Object @Nullable[] argArray,@Nullable Throwable throwable) { // throwable can be null
+    final public static FormattingTuple arrayFormat(final @Nullable String messagePattern, final @Nullable Object @Nullable[] argArray, @Nullable Throwable throwable) {
 
         if (messagePattern == null) {
             return new FormattingTuple(null, argArray, throwable);
@@ -226,13 +226,13 @@ final public class MessageFormatter {
                         // itself escaped: "abc x:\\{}"
                         // we have to consume one backward slash
                         sbuf.append(messagePattern, i, j - 1);
-                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[],@Nullable Object>()); // hash map allows both null value and key
+                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], @Nullable Object>()); // hash map allows both null value and key
                         i = j + 2;
                     }
                 } else {
                     // normal case
                     sbuf.append(messagePattern, i, j);
-                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[],@Nullable Object>());  // hash map allows both null value and key
+                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], @Nullable Object>());  // hash map allows both null value and key
                     i = j + 2;
                 }
             }
@@ -264,7 +264,7 @@ final public class MessageFormatter {
     }
 
     // special treatment of array values was suggested by 'lizongbo'
-    private static void deeplyAppendParameter(StringBuilder sbuf, @Nullable Object o, Map<Object[],@Nullable Object> seenMap) { // all calls on this method pass HashMap which allows null value
+    private static void deeplyAppendParameter(StringBuilder sbuf, @Nullable Object o, Map<Object[], @Nullable Object> seenMap) { // all calls on this method pass HashMap which allows null value
         if (o == null) {
             sbuf.append("null");
             return;
@@ -307,7 +307,7 @@ final public class MessageFormatter {
 
     }
 
-    private static void objectArrayAppend(StringBuilder sbuf, Object[] a, Map<Object[],@Nullable Object> seenMap) { // all calls on this method pass HashMap which allows null value
+    private static void objectArrayAppend(StringBuilder sbuf, Object[] a, Map<Object[], @Nullable Object> seenMap) { // all calls on this method pass HashMap which allows null value
         sbuf.append('[');
         if (!seenMap.containsKey(a)) {
             seenMap.put(a, null);
