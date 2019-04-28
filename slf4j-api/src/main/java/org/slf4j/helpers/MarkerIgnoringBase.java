@@ -39,10 +39,6 @@ public abstract class MarkerIgnoringBase extends NamedLoggerBase implements Logg
 
     private static final long serialVersionUID = 9044267456635152283L;
 
-    MarkerIgnoringBase(String name) {
-        super(name);
-    }
-
     public boolean isTraceEnabled(Marker marker) {
         return isTraceEnabled();
     }

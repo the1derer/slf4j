@@ -44,10 +44,6 @@ abstract class NamedLoggerBase implements Logger, Serializable {
 
     protected String name;
 
-    protected NamedLoggerBase(String name) {
-        this.name=name;
-    }
-
     public String getName() {
         return name;
     }

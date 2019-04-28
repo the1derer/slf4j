@@ -46,7 +46,6 @@ public class NOPLogger extends MarkerIgnoringBase {
      * except by derived classes, hence the protected  access for the constructor.
      */
     protected NOPLogger() {
-        super("NOP");
     }
 
     /**
