@@ -36,6 +36,7 @@ import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.event.SubstituteLoggingEvent;
 import org.slf4j.helpers.NOPServiceProvider;
 import org.slf4j.helpers.SubstituteServiceProvider;
@@ -138,6 +139,7 @@ public final class LoggerFactory {
         INITIALIZATION_STATE = UNINITIALIZED;
     }
 
+    @SuppressWarnings("nullness") // versionSanityCheck() is called only after successful initialization of PROVIDER by bind()
     private final static void performInitialization() {
         bind();
         if (INITIALIZATION_STATE == SUCCESSFUL_INITIALIZATION) {
@@ -295,9 +297,10 @@ public final class LoggerFactory {
         Util.report("See also " + REPLAY_URL);
     }
 
+    @RequiresNonNull("PROVIDER")
     private final static void versionSanityCheck() {
         try {
-            @SuppressWarnings("nullness") // versionSanityCheck() is called only after successful initialization of PROVIDER by bind()
+            // @SuppressWarnings("nullness") // versionSanityCheck() is called only after successful initialization of PROVIDER by bind()
             String requested = PROVIDER.getRequesteApiVersion();
 
             boolean match = false;
