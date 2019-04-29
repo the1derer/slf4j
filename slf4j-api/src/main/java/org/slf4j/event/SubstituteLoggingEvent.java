@@ -9,7 +9,7 @@ import org.slf4j.helpers.SubstituteLogger;
 
 // Very Poor design choices used here,as all of fields are left uninitialized and we can't use @RequireNonNull on getter methods inherited from LoggingEvent, 
 // without causing precondition errors in Logging event and we should not change behaviour of SuperClass.
-@SuppressWarnings("nullness") // solving https://github.com/typetools/checker-framework/issues/2216 can potentialy eliminate use of this @SuppressWarings
+@SuppressWarnings("nullness") // solving https://github.com/typetools/checker-framework/issues/2216 can potentialy eliminate use of this @SuppressWarnings
 public class SubstituteLoggingEvent implements LoggingEvent { 
 
     @MonotonicNonNull Level level;

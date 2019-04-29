@@ -379,7 +379,7 @@ public class SubstituteLogger implements Logger {
         return delegateEventAware;
     }
 
-    @SuppressWarnings("nullness") // Suppressing null derefernce warnings of logMethodCache as isDelegateEventAware() will ensure execusion of statement only if it is NonNull
+    @SuppressWarnings("nullness") // Suppressing null dereference warnings of logMethodCache as isDelegateEventAware() will ensure execution of statement only if it is NonNull
     @RequiresNonNull({"_delegate"})
     public void log(LoggingEvent event) {
         if (isDelegateEventAware()) {
