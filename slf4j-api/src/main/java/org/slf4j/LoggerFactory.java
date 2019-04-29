@@ -254,6 +254,7 @@ public final class LoggerFactory {
     // [contracts.precondition.not.satisfied] the called method 'event.getLogger().isDelegateEventAware()' has a precondition 
     // 'event.getLogger()._delegate' that is not satisfied
     @SuppressWarnings("nullness") // Code is unsafe, but in here only call to this method is preceded by repalySingleEvent() which will throws IllegalStateException if _delegate is null 
+    // @RequiresNonNull("#1.getLogger()._delegate")
     private static void emitReplayOrSubstituionWarning(SubstituteLoggingEvent event, int queueSize) {
         if (event.getLogger().isDelegateEventAware()) {
             emitReplayWarning(queueSize);
