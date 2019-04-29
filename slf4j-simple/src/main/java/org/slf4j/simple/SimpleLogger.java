@@ -212,7 +212,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * SimpleLogger instances.
      */
     SimpleLogger(String name) {
-        this.name = name;
+        super(name);
 
         String levelString = recursivelyComputeLevelString();
         if (levelString != null) {
