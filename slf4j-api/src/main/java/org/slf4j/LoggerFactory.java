@@ -421,10 +421,6 @@ public final class LoggerFactory {
      * @since 1.8.0
      */
 
-    // [ERROR] slf4j/slf4j-api/src/main/java/org/slf4j/LoggerFactory.java:[432,20] [return.type.incompatible] incompatible types in return.
-    // type of expression: @Initialized @MonotonicNonNull SLF4JServiceProvider
-    // method return type: @Initialized @NonNull SLF4JServiceProvider
-    @SuppressWarnings("nullness") //PROVIDER is always initialized by using performInitialization() or is already initialised so return type should be kept @NonNull
     static SLF4JServiceProvider getProvider() {
         if (INITIALIZATION_STATE == UNINITIALIZED) {
             synchronized (LoggerFactory.class) {
@@ -435,8 +431,11 @@ public final class LoggerFactory {
             }
         }
         switch (INITIALIZATION_STATE) {
-        case SUCCESSFUL_INITIALIZATION:
+        case SUCCESSFUL_INITIALIZATION:{
+            assert PROVIDER != null
+            : "@AssumeAssertion(nullness): PROVIDER is always initialized by using performInitialization() or is already initialized";
             return PROVIDER;
+        }
         case NOP_FALLBACK_INITIALIZATION:
             return NOP_FALLBACK_FACTORY;
         case FAILED_INITIALIZATION:
