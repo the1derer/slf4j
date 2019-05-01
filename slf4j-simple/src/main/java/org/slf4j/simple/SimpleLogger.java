@@ -27,6 +27,10 @@ package org.slf4j.simple;
 import java.io.PrintStream;
 import java.util.Date;
 
+import org.checkerframework.checker.initialization.qual.UnderInitialization;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.Logger;
 import org.slf4j.event.LoggingEvent;
 import org.slf4j.helpers.FormattingTuple;
@@ -157,7 +161,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     protected static final int LOG_LEVEL_OFF = LOG_LEVEL_ERROR + 10;
 
     private static boolean INITIALIZED = false;
-    static SimpleLoggerConfiguration CONFIG_PARAMS = null;
+    static @MonotonicNonNull SimpleLoggerConfiguration CONFIG_PARAMS = null;
 
     static void lazyInit() {
         if (INITIALIZED) {
@@ -177,7 +181,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     /** The current log level */
     protected int currentLogLevel = LOG_LEVEL_INFO;
     /** The short name of this simple log instance */
-    private transient String shortLogName = null;
+    private transient @MonotonicNonNull String shortLogName = null;
 
     /**
      * All system properties used by <code>SimpleLogger</code> start with this
@@ -222,7 +226,8 @@ public class SimpleLogger extends MarkerIgnoringBase {
         }
     }
 
-    String recursivelyComputeLevelString() {
+    @RequiresNonNull("name")
+    @Nullable String recursivelyComputeLevelString(@UnderInitialization SimpleLogger this) {
         String tempName = name;
         String levelString = null;
         int indexOfLastDot = tempName.length();
@@ -245,7 +250,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * @param t
      *            The exception whose stack trace should be logged
      */
-    private void log(int level, String message, Throwable t) {
+    private void log(int level, @Nullable String message, @Nullable Throwable t) {
         if (!isLevelEnabled(level)) {
             return;
         }
@@ -312,7 +317,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
         throw new IllegalStateException("Unrecognized level [" + level + "]");
     }
 
-    void write(StringBuilder buf, Throwable t) {
+    void write(StringBuilder buf, @Nullable Throwable t) {
         PrintStream targetStream = CONFIG_PARAMS.outputChoice.getTargetPrintStream();
 
         targetStream.println(buf.toString());
@@ -320,7 +325,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
         targetStream.flush();
     }
 
-    protected void writeThrowable(Throwable t, PrintStream targetStream) {
+    protected void writeThrowable(@Nullable Throwable t, PrintStream targetStream) {
         if (t != null) {
             t.printStackTrace(targetStream);
         }
@@ -347,7 +352,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * @param arg1
      * @param arg2
      */
-    private void formatAndLog(int level, String format, Object arg1, Object arg2) {
+    private void formatAndLog(int level, String format, Object arg1, @Nullable Object arg2) {
         if (!isLevelEnabled(level)) {
             return;
         }
