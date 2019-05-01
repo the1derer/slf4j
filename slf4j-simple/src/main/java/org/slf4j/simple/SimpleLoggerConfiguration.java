@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.helpers.Util;
 import org.slf4j.simple.OutputChoice.OutputChoiceType;
 
@@ -56,7 +57,7 @@ public class SimpleLoggerConfiguration {
     boolean levelInBrackets = LEVEL_IN_BRACKETS_DEFAULT;
 
     private static String LOG_FILE_DEFAULT = "System.err";
-    private String logFile = LOG_FILE_DEFAULT;
+    private @Nullable String logFile = LOG_FILE_DEFAULT;
     @Nullable OutputChoice outputChoice = null;
 
     private static final boolean CACHE_OUTPUT_STREAM_DEFAULT = false;
@@ -161,7 +162,7 @@ public class SimpleLoggerConfiguration {
         return SimpleLogger.LOG_LEVEL_INFO;
     }
 
-    private static OutputChoice computeOutputChoice(String logFile, boolean cacheOutputStream) {
+    private static OutputChoice computeOutputChoice(@Nullable String logFile, boolean cacheOutputStream) {
         if ("System.err".equalsIgnoreCase(logFile))
             if (cacheOutputStream)
                 return new OutputChoice(OutputChoiceType.CACHED_SYS_ERR);
@@ -174,9 +175,13 @@ public class SimpleLoggerConfiguration {
                 return new OutputChoice(OutputChoiceType.SYS_OUT);
         } else {
             try {
-                FileOutputStream fos = new FileOutputStream(logFile);
-                PrintStream printStream = new PrintStream(fos);
+                if(logFile != null) { // Error if possible null value of logFile
+                    FileOutputStream fos = new FileOutputStream(logFile);
+                    PrintStream printStream = new PrintStream(fos);
                 return new OutputChoice(printStream);
+                }
+                else 
+                    return new OutputChoice(OutputChoiceType.SYS_ERR);
             } catch (FileNotFoundException e) {
                 Util.report("Could not open [" + logFile + "]. Defaulting to System.err", e);
                 return new OutputChoice(OutputChoiceType.SYS_ERR);
