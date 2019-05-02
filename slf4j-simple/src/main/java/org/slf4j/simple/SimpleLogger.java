@@ -305,7 +305,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     @RequiresNonNull({"CONFIG_PARAMS"})
-    protected String renderLevel(int level) {
+    protected @Nullable String renderLevel(int level) {
         switch (level) {
         case LOG_LEVEL_TRACE:
             return "TRACE";
