@@ -28,6 +28,7 @@ import java.io.PrintStream;
 import java.util.Date;
 
 import org.checkerframework.checker.initialization.qual.UnderInitialization;
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.checker.nullness.qual.RequiresNonNull;
@@ -173,6 +174,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
 
     // external software might be invoking this method directly. Do not rename
     // or change its semantics.
+    @EnsuresNonNull("CONFIG_PARAMS")
     static void init() {
         CONFIG_PARAMS = new SimpleLoggerConfiguration();
         CONFIG_PARAMS.init();
@@ -215,6 +217,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * Package access allows only {@link SimpleLoggerFactory} to instantiate
      * SimpleLogger instances.
      */
+    @RequiresNonNull("CONFIG_PARAMS")
     SimpleLogger(String name) {
         super(name);
 
@@ -226,7 +229,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
         }
     }
 
-    @RequiresNonNull("name")
+    @RequiresNonNull({"name","CONFIG_PARAMS"})
     @Nullable String recursivelyComputeLevelString(@UnderInitialization SimpleLogger this) {
         String tempName = name;
         String levelString = null;
@@ -301,6 +304,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
 
     }
 
+    @RequiresNonNull({"CONFIG_PARAMS"})
     protected String renderLevel(int level) {
         switch (level) {
         case LOG_LEVEL_TRACE:
@@ -317,6 +321,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
         throw new IllegalStateException("Unrecognized level [" + level + "]");
     }
 
+    @RequiresNonNull({"CONFIG_PARAMS"})
     void write(StringBuilder buf, @Nullable Throwable t) {
         PrintStream targetStream = CONFIG_PARAMS.outputChoice.getTargetPrintStream();
 
@@ -331,6 +336,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
         }
     }
 
+    @RequiresNonNull({"CONFIG_PARAMS","CONFIG_PARAMS.dateFormatter"})
     private String getFormattedDate() {
         Date now = new Date();
         String dateText;
