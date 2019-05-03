@@ -27,7 +27,7 @@ package org.slf4j.simple;
 import java.io.PrintStream;
 import java.util.Date;
 
-import org.checkerframework.checker.initialization.qual.UnderInitialization;
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
 import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -229,13 +229,15 @@ public class SimpleLogger extends MarkerIgnoringBase {
         }
     }
 
-    @RequiresNonNull({"name","CONFIG_PARAMS"})
-    @Nullable String recursivelyComputeLevelString(@UnderInitialization SimpleLogger this) {
+    @RequiresNonNull({"name"})
+    @Nullable String recursivelyComputeLevelString(@UnknownInitialization SimpleLogger this) {
         String tempName = name;
         String levelString = null;
         int indexOfLastDot = tempName.length();
         while ((levelString == null) && (indexOfLastDot > -1)) {
             tempName = tempName.substring(0, indexOfLastDot);
+            assert CONFIG_PARAMS != null
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after initialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
             levelString = CONFIG_PARAMS.getStringProperty(SimpleLogger.LOG_KEY_PREFIX + tempName, null);
             indexOfLastDot = String.valueOf(tempName).lastIndexOf(".");
         }
@@ -261,7 +263,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
         StringBuilder buf = new StringBuilder(32);
 
         assert CONFIG_PARAMS != null
-            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after intialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after initialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
 
         // Append date-time if so configured
         if (CONFIG_PARAMS.showDateTime) {
@@ -381,7 +383,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * @param arguments
      *            a list of 3 ore more arguments
      */
-    private void formatAndLog(int level, String format, Object... arguments) {
+    private void formatAndLog(int level, String format, @Nullable Object... arguments) {
         if (!isLevelEnabled(level)) {
             return;
         }
@@ -518,7 +520,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * Perform double parameter substitution before logging the message of level
      * INFO according to the format outlined above.
      */
-    public void info(String format, Object... argArray) {
+    public void info(String format, @Nullable Object... argArray) {
         formatAndLog(LOG_LEVEL_INFO, format, argArray);
     }
 

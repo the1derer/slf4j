@@ -24,6 +24,7 @@
  */
 package org.slf4j.helpers;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.helpers.MarkerIgnoringBase;
 
@@ -147,7 +148,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation.  */
-    public final void info(String format, Object... argArray) {
+    public final void info(String format, @Nullable Object... argArray) {
         // NOP
     }
 

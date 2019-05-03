@@ -25,6 +25,9 @@
 
 package org.slf4j;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.PolyNull;
+
 /**
  * The org.slf4j.Logger interface is the main user entry point of SLF4J API.
  * It is expected that logging takes place through concrete implementations
@@ -394,7 +397,7 @@ public interface Logger {
      * @param format    the format string
      * @param arguments a list of 3 or more arguments
      */
-    public void info(String format, Object... arguments);
+    public void info(String format, @Nullable Object... arguments);
 
     /**
      * Log an exception (throwable) at the INFO level with an

@@ -182,7 +182,7 @@ public class SubstituteLogger implements Logger {
         delegate().info(format, arg1, arg2);
     }
 
-    public void info(String format, Object... arguments) {
+    public void info(String format, @Nullable Object... arguments) {
         delegate().info(format, arguments);
     }
 

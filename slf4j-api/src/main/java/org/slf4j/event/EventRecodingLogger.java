@@ -158,7 +158,7 @@ public class EventRecodingLogger implements Logger {
         recordEvent(Level.INFO, format, new Object[] { arg1, arg2 }, null);
     }
 
-    public void info(String format, Object... arguments) {
+    public void info(String format, @Nullable Object... arguments) {
         recordEvent(Level.INFO, format, arguments, null);
     }
 
