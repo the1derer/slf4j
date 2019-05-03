@@ -24,6 +24,7 @@
  */
 package org.slf4j.nop;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.helpers.MarkerIgnoringBase;
 
@@ -98,7 +99,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void debug(String msg) {
+    final public void debug(@Nullable String msg) {
         // NOP
     }
 
@@ -118,7 +119,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void debug(String msg, Throwable t) {
+    final public void debug(@Nullable String msg, Throwable t) {
         // NOP
     }
 
@@ -132,7 +133,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void info(String msg) {
+    final public void info(@Nullable String msg) {
         // NOP
     }
 
@@ -145,14 +146,14 @@ public class NOPLogger extends MarkerIgnoringBase {
     final public void info(String format, Object arg1, Object arg2) {
         // NOP
     }
-
+    @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
     /** A NOP implementation.  */
     public final void info(String format, Object... argArray) {
         // NOP
     }
 
     /** A NOP implementation. */
-    final public void info(String msg, Throwable t) {
+    final public void info(@Nullable String msg, Throwable t) {
         // NOP
     }
 
@@ -165,7 +166,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void warn(String msg) {
+    final public void warn(@Nullable String msg) {
         // NOP
     }
 
@@ -185,7 +186,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void warn(String msg, Throwable t) {
+    final public void warn(@Nullable String msg, Throwable t) {
         // NOP
     }
 
@@ -195,7 +196,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void error(String msg) {
+    final public void error(@Nullable String msg) {
         // NOP
     }
 
@@ -215,7 +216,7 @@ public class NOPLogger extends MarkerIgnoringBase {
     }
 
     /** A NOP implementation. */
-    final public void error(String msg, Throwable t) {
+    final public void error(@Nullable String msg, Throwable t) {
         // NOP
     }
 }

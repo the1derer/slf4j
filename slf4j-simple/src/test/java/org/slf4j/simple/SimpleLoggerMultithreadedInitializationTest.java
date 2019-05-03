@@ -92,18 +92,21 @@ public class SimpleLoggerMultithreadedInitializationTest extends MultithreadedIn
             this(ps, false);
         }
 
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
         public void print(@Nullable String s) {
             if (duplicate)
                 other.print(s);
             stringList.add(s);
         }
 
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
         public void println(@Nullable String s) {
             if (duplicate)
                 other.println(s);
             stringList.add(s);
         }
 
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
         public void println(@Nullable Object o) {
             if (duplicate)
                 other.println(o);

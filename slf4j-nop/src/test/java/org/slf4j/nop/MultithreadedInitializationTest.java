@@ -34,6 +34,9 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,6 +76,8 @@ public class MultithreadedInitializationTest {
 
         for (LoggerAccessingThread accessor : accessors) {
             EVENT_COUNT.getAndIncrement();
+            assert accessor.logger != null 
+                : "@AssumeAssertion(nullness): harness() which is used to generate assessors calls start() which in turn calls run() which @EnsuresNull(accessor.logger)";
             accessor.logger.info("post harness");
         }
 
@@ -100,7 +105,7 @@ public class MultithreadedInitializationTest {
 
     static class LoggerAccessingThread extends Thread {
         final CyclicBarrier barrier;
-        Logger logger;
+        @MonotonicNonNull Logger logger;
         int count;
 
         LoggerAccessingThread(CyclicBarrier barrier, int count) {
@@ -108,6 +113,7 @@ public class MultithreadedInitializationTest {
             this.count = count;
         }
 
+        @EnsuresNonNull("logger")
         public void run() {
             try {
                 barrier.await();
@@ -131,17 +137,20 @@ public class MultithreadedInitializationTest {
             other = ps;
         }
 
-        public void print(String s) {
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
+        public void print(@Nullable String s) {
             other.print(s);
             stringList.add(s);
         }
 
-        public void println(String s) {
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
+        public void println(@Nullable String s) {
             other.println(s);
             stringList.add(s);
         }
 
-        public void println(Object o) {
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
+        public void println(@Nullable Object o) {
             other.println(o);
             stringList.add(o.toString());
         }

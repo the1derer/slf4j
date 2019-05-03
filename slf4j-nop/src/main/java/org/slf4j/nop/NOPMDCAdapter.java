@@ -26,6 +26,7 @@ package org.slf4j.nop;
 
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.spi.MDCAdapter;
 
 /**
@@ -42,7 +43,7 @@ public class NOPMDCAdapter implements MDCAdapter {
     public void clear() {
     }
 
-    public String get(String key) {
+    public @Nullable String get(String key) {
         return null;
     }
 
@@ -52,7 +53,7 @@ public class NOPMDCAdapter implements MDCAdapter {
     public void remove(String key) {
     }
 
-    public Map<String, String> getCopyOfContextMap() {
+    public @Nullable Map<String, String> getCopyOfContextMap() {
         return null;
     }
 
