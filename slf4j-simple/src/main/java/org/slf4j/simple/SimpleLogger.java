@@ -327,8 +327,10 @@ public class SimpleLogger extends MarkerIgnoringBase {
     @RequiresNonNull({"CONFIG_PARAMS"})
     void write(StringBuilder buf, @Nullable Throwable t) {
         assert CONFIG_PARAMS.outputChoice != null
-            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after intialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after initialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
         PrintStream targetStream = CONFIG_PARAMS.outputChoice.getTargetPrintStream();
+        assert targetStream != null
+            : "@AssumeAssertion(nullness):computeOutputChoice() will only initialize outputChoice with outputChoice.getTargetPrintStream() only returning @NonNull value";
 
         targetStream.println(buf.toString());
         writeThrowable(t, targetStream);
