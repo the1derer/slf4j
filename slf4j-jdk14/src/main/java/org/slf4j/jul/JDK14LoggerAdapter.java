@@ -27,6 +27,7 @@ package org.slf4j.jul;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.event.EventConstants;
@@ -55,8 +56,9 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
     // WARN: JDK14LoggerAdapter constructor should have only package access so
     // that only JDK14LoggerFactory be able to create one.
     JDK14LoggerAdapter(java.util.logging.Logger logger) {
+        super(logger.getName());
         this.logger = logger;
-        this.name = logger.getName();
+        // this.name = logger.getName();
     }
 
     /**
@@ -174,7 +176,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param msg
      *          - the message object to be logged
      */
-    public void debug(String msg) {
+    public void debug(@Nullable String msg) {
         if (logger.isLoggable(Level.FINE)) {
             log(SELF, Level.FINE, msg, null);
         }
@@ -252,7 +254,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param t
      *          the exception (throwable) to log
      */
-    public void debug(String msg, Throwable t) {
+    public void debug(@Nullable String msg, Throwable t) {
         if (logger.isLoggable(Level.FINE)) {
             log(SELF, Level.FINE, msg, t);
         }
@@ -273,7 +275,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param msg
      *          - the message object to be logged
      */
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         if (logger.isLoggable(Level.INFO)) {
             log(SELF, Level.INFO, msg, null);
         }
@@ -352,7 +354,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param t
      *          the exception (throwable) to log
      */
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         if (logger.isLoggable(Level.INFO)) {
             log(SELF, Level.INFO, msg, t);
         }
@@ -374,7 +376,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param msg
      *          - the message object to be logged
      */
-    public void warn(String msg) {
+    public void warn(@Nullable String msg) {
         if (logger.isLoggable(Level.WARNING)) {
             log(SELF, Level.WARNING, msg, null);
         }
@@ -454,7 +456,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param t
      *          the exception (throwable) to log
      */
-    public void warn(String msg, Throwable t) {
+    public void warn(@Nullable String msg, Throwable t) {
         if (logger.isLoggable(Level.WARNING)) {
             log(SELF, Level.WARNING, msg, t);
         }
@@ -475,7 +477,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param msg
      *          - the message object to be logged
      */
-    public void error(String msg) {
+    public void error(@Nullable String msg) {
         if (logger.isLoggable(Level.SEVERE)) {
             log(SELF, Level.SEVERE, msg, null);
         }
@@ -555,7 +557,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param t
      *          the exception (throwable) to log
      */
-    public void error(String msg, Throwable t) {
+    public void error(@Nullable String msg, Throwable t) {
         if (logger.isLoggable(Level.SEVERE)) {
             log(SELF, Level.SEVERE, msg, t);
         }
@@ -572,7 +574,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param msg
      * @param t
      */
-    private void log(String callerFQCN, Level level, String msg, Throwable t) {
+    private void log(String callerFQCN, Level level, @Nullable String msg, @Nullable Throwable t) {
         // millis and thread are filled by the constructor
         LogRecord record = new LogRecord(level, msg);
         record.setLoggerName(getName());
