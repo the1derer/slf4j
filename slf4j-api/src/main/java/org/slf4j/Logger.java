@@ -26,7 +26,6 @@
 package org.slf4j;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.checkerframework.checker.nullness.qual.PolyNull;
 
 /**
  * The org.slf4j.Logger interface is the main user entry point of SLF4J API.
@@ -230,7 +229,7 @@ public interface Logger {
      *
      * @param msg the message string to be logged
      */
-    public void debug(String msg);
+    public void debug(@Nullable String msg);
 
     /**
      * Log a message at the DEBUG level according to the specified format
@@ -280,7 +279,7 @@ public interface Logger {
      * @param msg the message accompanying the exception
      * @param t   the exception (throwable) to log
      */
-    public void debug(String msg, Throwable t);
+    public void debug(@Nullable String msg, Throwable t);
 
     /**
      * Similar to {@link #isDebugEnabled()} method except that the
@@ -356,7 +355,7 @@ public interface Logger {
      *
      * @param msg the message string to be logged
      */
-    public void info(String msg);
+    public void info(@Nullable String msg);
 
     /**
      * Log a message at the INFO level according to the specified format
@@ -397,7 +396,7 @@ public interface Logger {
      * @param format    the format string
      * @param arguments a list of 3 or more arguments
      */
-    public void info(String format, @Nullable Object... arguments);
+    public void info(String format, Object... arguments);
 
     /**
      * Log an exception (throwable) at the INFO level with an
@@ -406,7 +405,7 @@ public interface Logger {
      * @param msg the message accompanying the exception
      * @param t   the exception (throwable) to log
      */
-    public void info(String msg, Throwable t);
+    public void info(@Nullable String msg, Throwable t);
 
     /**
      * Similar to {@link #isInfoEnabled()} method except that the marker
@@ -481,7 +480,7 @@ public interface Logger {
      *
      * @param msg the message string to be logged
      */
-    public void warn(String msg);
+    public void warn(@Nullable String msg);
 
     /**
      * Log a message at the WARN level according to the specified format
@@ -531,7 +530,7 @@ public interface Logger {
      * @param msg the message accompanying the exception
      * @param t   the exception (throwable) to log
      */
-    public void warn(String msg, Throwable t);
+    public void warn(@Nullable String msg, Throwable t);
 
     /**
      * Similar to {@link #isWarnEnabled()} method except that the marker
@@ -607,7 +606,7 @@ public interface Logger {
      *
      * @param msg the message string to be logged
      */
-    public void error(String msg);
+    public void error(@Nullable String msg);
 
     /**
      * Log a message at the ERROR level according to the specified format
@@ -657,7 +656,7 @@ public interface Logger {
      * @param msg the message accompanying the exception
      * @param t   the exception (throwable) to log
      */
-    public void error(String msg, Throwable t);
+    public void error(@Nullable String msg, Throwable t);
 
     /**
      * Similar to {@link #isErrorEnabled()} method except that the

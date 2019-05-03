@@ -454,7 +454,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which logs messages of level DEBUG according to
      * the format outlined above.
      */
-    public void debug(String msg) {
+    public void debug(@Nullable String msg) {
         log(LOG_LEVEL_DEBUG, msg, null);
     }
 
@@ -483,7 +483,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level DEBUG, including an exception. */
-    public void debug(String msg, Throwable t) {
+    public void debug(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_DEBUG, msg, t);
     }
 
@@ -496,7 +496,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which logs messages of level INFO according to
      * the format outlined above.
      */
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         log(LOG_LEVEL_INFO, msg, null);
     }
 
@@ -525,7 +525,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level INFO, including an exception. */
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_INFO, msg, t);
     }
 
@@ -538,7 +538,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which always logs messages of level WARN
      * according to the format outlined above.
      */
-    public void warn(String msg) {
+    public void warn(@Nullable String msg) {
         log(LOG_LEVEL_WARN, msg, null);
     }
 
@@ -567,7 +567,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level WARN, including an exception. */
-    public void warn(String msg, Throwable t) {
+    public void warn(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_WARN, msg, t);
     }
 
@@ -580,7 +580,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which always logs messages of level ERROR
      * according to the format outlined above.
      */
-    public void error(String msg) {
+    public void error(@Nullable String msg) {
         log(LOG_LEVEL_ERROR, msg, null);
     }
 
@@ -609,7 +609,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level ERROR, including an exception. */
-    public void error(String msg, Throwable t) {
+    public void error(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_ERROR, msg, t);
     }
 

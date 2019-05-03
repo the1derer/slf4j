@@ -64,8 +64,8 @@ public class SubstituteLoggingEvent implements LoggingEvent {
         return message;
     }
 
-    @EnsuresNonNull("message")
-    public void setMessage(String message) {
+    // @EnsuresNonNull("message")
+    public void setMessage(@Nullable String message) {
         this.message = message;
     }
 

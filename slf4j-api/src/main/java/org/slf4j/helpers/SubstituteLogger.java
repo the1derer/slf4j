@@ -122,7 +122,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isDebugEnabled();
     }
 
-    public void debug(String msg) {
+    public void debug(@Nullable String msg) {
         delegate().debug(msg);
     }
 
@@ -138,7 +138,7 @@ public class SubstituteLogger implements Logger {
         delegate().debug(format, arguments);
     }
 
-    public void debug(String msg, Throwable t) {
+    public void debug(@Nullable String msg, Throwable t) {
         delegate().debug(msg, t);
     }
 
@@ -170,7 +170,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isInfoEnabled();
     }
 
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         delegate().info(msg);
     }
 
@@ -182,11 +182,11 @@ public class SubstituteLogger implements Logger {
         delegate().info(format, arg1, arg2);
     }
 
-    public void info(String format, @Nullable Object... arguments) {
+    public void info(String format, Object... arguments) {
         delegate().info(format, arguments);
     }
 
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         delegate().info(msg, t);
     }
 
@@ -218,7 +218,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isWarnEnabled();
     }
 
-    public void warn(String msg) {
+    public void warn(@Nullable String msg) {
         delegate().warn(msg);
     }
 
@@ -234,7 +234,7 @@ public class SubstituteLogger implements Logger {
         delegate().warn(format, arguments);
     }
 
-    public void warn(String msg, Throwable t) {
+    public void warn(@Nullable String msg, Throwable t) {
         delegate().warn(msg, t);
     }
 
@@ -266,7 +266,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isErrorEnabled();
     }
 
-    public void error(String msg) {
+    public void error(@Nullable String msg) {
         delegate().error(msg);
     }
 
@@ -282,7 +282,7 @@ public class SubstituteLogger implements Logger {
         delegate().error(format, arguments);
     }
 
-    public void error(String msg, Throwable t) {
+    public void error(@Nullable String msg, Throwable t) {
         delegate().error(msg, t);
     }
 
