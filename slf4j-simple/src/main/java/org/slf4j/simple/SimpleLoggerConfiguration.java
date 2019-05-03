@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.helpers.Util;
 import org.slf4j.simple.OutputChoice.OutputChoiceType;
 

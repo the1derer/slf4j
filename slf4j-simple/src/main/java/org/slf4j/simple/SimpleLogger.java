@@ -260,6 +260,9 @@ public class SimpleLogger extends MarkerIgnoringBase {
 
         StringBuilder buf = new StringBuilder(32);
 
+        assert CONFIG_PARAMS != null
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after intialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
+
         // Append date-time if so configured
         if (CONFIG_PARAMS.showDateTime) {
             if (CONFIG_PARAMS.dateFormatter != null) {
@@ -323,6 +326,8 @@ public class SimpleLogger extends MarkerIgnoringBase {
 
     @RequiresNonNull({"CONFIG_PARAMS"})
     void write(StringBuilder buf, @Nullable Throwable t) {
+        assert CONFIG_PARAMS.outputChoice != null
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after intialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
         PrintStream targetStream = CONFIG_PARAMS.outputChoice.getTargetPrintStream();
 
         targetStream.println(buf.toString());
