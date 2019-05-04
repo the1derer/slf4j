@@ -202,7 +202,7 @@
             <arg>-Xbootclasspath/p:${annotatedJdk}</arg>
             <!-- -Awarns turns type-checking warnings into errors. -->
             <!-- <arg>-Awarns</arg> -->
-            <arg>-Astubs=InvocationHandler.astub:Proxy.astub:Assert.astub:PrivilegedAction.astub</arg>
+            <arg>-Astubs=InvocationHandler.astub:Proxy.astub:Assert.astub:PrivilegedAction.astub:LogRecord.astub:Method.astub</arg>
           </compilerArgs>
         </configuration>
       </plugin>

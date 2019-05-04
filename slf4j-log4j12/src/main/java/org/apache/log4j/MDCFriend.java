@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.MDC;
 import org.apache.log4j.helpers.ThreadLocalMap;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class MDCFriend {
 

@@ -38,7 +38,7 @@ public final class Util {
     private Util() {
     }
 
-    public static @Nullable String safeGetSystemProperty(String key) {
+    public static @Nullable String safeGetSystemProperty(@Nullable String key) {
         if (key == null)
             throw new IllegalArgumentException("null input");
 

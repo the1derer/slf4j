@@ -47,6 +47,7 @@ import org.slf4j.spi.LocationAwareLogger;
  * @author Ceki G&uuml;lc&uuml;
  * @author Peter Royal
  */
+@SuppressWarnings("nullness") // Checker not able to recognize LogRecord.astub for some reason.
 public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements LocationAwareLogger {
 
     private static final long serialVersionUID = -8053026990503422791L;
@@ -55,6 +56,7 @@ public final class JDK14LoggerAdapter extends MarkerIgnoringBase implements Loca
 
     // WARN: JDK14LoggerAdapter constructor should have only package access so
     // that only JDK14LoggerFactory be able to create one.
+    @SuppressWarnings("nullness") // Supressing warning that logger.getName() is @ Nullable but since only JDK14LoggerFactory can create an instance and it always provides a @NonNull name so it logger.getName() will always return @NonNull
     JDK14LoggerAdapter(java.util.logging.Logger logger) {
         super(logger.getName());
         this.logger = logger;

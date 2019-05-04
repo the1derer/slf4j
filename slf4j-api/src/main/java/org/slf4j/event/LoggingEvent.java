@@ -1,6 +1,7 @@
 package org.slf4j.event;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 import org.slf4j.Marker;
 
 /**
@@ -20,7 +21,7 @@ public interface LoggingEvent {
 
     String getThreadName();
 
-    @Nullable Object @Nullable [] getArgumentArray();
+    @PolyNull Object @PolyNull [] getArgumentArray();
 
     long getTimeStamp();
 
