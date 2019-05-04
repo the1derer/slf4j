@@ -710,7 +710,7 @@ public class Assert {
      * okay)
      * @param object Object to check or <code>null</code>
      */
-    static public void assertNotNull(String message, Object object) {
+    static public void assertNotNull(@Nullable String message,@Nullable Object object) {
         assertTrue(message, object != null);
     }
 
@@ -720,7 +720,7 @@ public class Assert {
      *
      * @param object Object to check or <code>null</code>
      */
-    static public void assertNotNull(Object object) {
+    static public void assertNotNull(@Nullable Object object) {
         assertNotNull(null, object);
     }
 

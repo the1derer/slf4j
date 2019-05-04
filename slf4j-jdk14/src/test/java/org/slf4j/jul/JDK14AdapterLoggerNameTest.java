@@ -31,13 +31,16 @@ import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.jul.JDK14LoggerFactory;
 
 public class JDK14AdapterLoggerNameTest {
-    private MockHandler mockHandler;
+    private @MonotonicNonNull MockHandler mockHandler;
     static Random random = new Random(System.currentTimeMillis());
     long diff = random.nextInt(10000);
     String loggerName = "JDK14AdapterLoggerNameTest"+diff;
@@ -58,12 +61,14 @@ public class JDK14AdapterLoggerNameTest {
     }
 
     @Test
+    @RequiresNonNull({"mockHandler","mockHandler.record"})
     public void testLoggerNameUsingJdkLogging() throws Exception {
         logger.info("test message");
         assertCorrectLoggerName();
     }
 
     @Test
+    @RequiresNonNull({"mockHandler","mockHandler.record"})
     public void testLoggerNameUsingSlf4j() throws Exception {
         JDK14LoggerFactory factory = new JDK14LoggerFactory();
         org.slf4j.Logger logger = factory.getLogger(loggerName);
@@ -71,6 +76,7 @@ public class JDK14AdapterLoggerNameTest {
         assertCorrectLoggerName();
     }
 
+    @EnsuresNonNull("mockHandler")
     private void addMockHandler(Logger logger) {
         mockHandler = new MockHandler();
         removeHandlers(logger);
@@ -85,13 +91,14 @@ public class JDK14AdapterLoggerNameTest {
         }
     }
 
+    @RequiresNonNull({"mockHandler","mockHandler.record"})
     private void assertCorrectLoggerName() {
         assertNotNull("no log record", mockHandler.record);
         assertNotNull("missing logger name", mockHandler.record.getLoggerName());
     }
 
     private class MockHandler extends java.util.logging.Handler {
-        public LogRecord record;
+        public @MonotonicNonNull LogRecord record;
 
         public void close() throws SecurityException {
         }
@@ -99,6 +106,7 @@ public class JDK14AdapterLoggerNameTest {
         public void flush() {
         }
 
+        @EnsuresNonNull("this.record")
         public void publish(LogRecord record) {
             this.record = record;
         }

@@ -112,7 +112,7 @@ public class MDC {
      * @throws IllegalArgumentException
      *           in case the "key" parameter is null
      */
-    public static void put(String key, String val) throws IllegalArgumentException {
+    public static void put(@Nullable String key, String val) throws IllegalArgumentException {
         if (key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
