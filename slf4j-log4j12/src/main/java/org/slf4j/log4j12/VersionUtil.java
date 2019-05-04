@@ -13,6 +13,7 @@ public class VersionUtil {
         return getJavaMajorVersion(javaVersionString);
     }
 
+    @SuppressWarnings("nullness") // Stub file is not being applied
     static public int getJavaMajorVersion(@Nullable String versionString) {
         if (versionString == null)
             return MINIMAL_VERSION;
