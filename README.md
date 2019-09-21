@@ -1,3 +1,23 @@
+### TypeChecked version of SLF4J
+
+To Build
+``mvn clean install``
+
+
+1. Unannotated Code is present at the master branch.
+
+
+2. To use checker-framework  use following steps(Annotated code present at 'typecheck-nullness' branch)
+
+Made a pull request to master to indicate file changes(https://github.com/the1derer/slf4j/pull/1)
+
+(i) To checkout annotated branch
+     ``git checkout typecheck-nullness``
+
+(ii) To Check initial Errors on main src files given by Checker-Framework<br />
+     See allerrors.log
+
+
 # About SLF4J
 The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time.
 More information can be found on the [SLF4J website](http://www.slf4j.org).
