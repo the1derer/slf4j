@@ -28,6 +28,7 @@ import static org.junit.Assert.fail;
 
 import java.util.logging.Handler;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.After;
 import org.junit.Before;
 import org.slf4j.testHarness.MultithreadedInitializationTest;
@@ -60,12 +61,14 @@ public class JDK14MultithreadedInitializationTest extends MultithreadedInitializ
     protected long getRecordedEventCount() {
         CountingHandler ra = findRecordingHandler();
         if (ra == null) {
-            fail("failed to fing RecordingHandler");
+            fail("failed to find RecordingHandler");
         }
+        assert ra != null
+            :"@AssumeAssertion(nullness) : fail() will ensure the program wil fail if ra == null";
         return ra.eventCount.get();
     }
 
-    private CountingHandler findRecordingHandler() {
+    private @Nullable CountingHandler findRecordingHandler() {
         Handler[] handlers = julOrgLogger.getHandlers();
         for (Handler h : handlers) {
             if (h instanceof CountingHandler)

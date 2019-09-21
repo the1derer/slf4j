@@ -27,6 +27,7 @@ package org.slf4j;
 import java.io.Closeable;
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.helpers.BasicMDCAdapter;
 import org.slf4j.helpers.NOPMDCAdapter;
 import org.slf4j.helpers.Util;
@@ -111,7 +112,7 @@ public class MDC {
      * @throws IllegalArgumentException
      *           in case the "key" parameter is null
      */
-    public static void put(String key, String val) throws IllegalArgumentException {
+    public static void put(@Nullable String key, String val) throws IllegalArgumentException {
         if (key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
@@ -166,7 +167,7 @@ public class MDC {
      * @throws IllegalArgumentException
      *           in case the "key" parameter is null
      */
-    public static String get(String key) throws IllegalArgumentException {
+    public static @Nullable String get(String key) throws IllegalArgumentException {
         if (key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
@@ -215,7 +216,7 @@ public class MDC {
      * @return A copy of the current thread's context map. May be null.
      * @since 1.5.1
      */
-    public static Map<String, String> getCopyOfContextMap() {
+    public static @Nullable Map<String, String> getCopyOfContextMap() {
         if (mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }

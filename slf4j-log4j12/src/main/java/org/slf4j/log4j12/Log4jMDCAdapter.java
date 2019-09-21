@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.MDCFriend;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.spi.MDCAdapter;
 
 public class Log4jMDCAdapter implements MDCAdapter {
@@ -72,7 +73,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public Map getCopyOfContextMap() {
+    public @Nullable Map getCopyOfContextMap() {
         Map old = org.apache.log4j.MDC.getContext();
         if (old != null) {
             return new HashMap(old);

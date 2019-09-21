@@ -31,6 +31,7 @@ import java.io.Serializable;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.LocationInfo;
 import org.apache.log4j.spi.ThrowableInformation;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.event.LoggingEvent;
@@ -76,9 +77,10 @@ public final class Log4jLoggerAdapter extends MarkerIgnoringBase implements Loca
     // WARN: Log4jLoggerAdapter constructor should have only package access so
     // that
     // only Log4jLoggerFactory be able to create one.
+    @SuppressWarnings("nullness") // Supressing warning that logger.getName() is @ Nullable but since only Logger4jLoggerFactory can create an instance and it always provides a @NonNull name so it logger.getName() will always return @NonNull
     Log4jLoggerAdapter(org.apache.log4j.Logger logger) {
+        super(logger.getName());
         this.logger = logger;
-        this.name = logger.getName();
         traceCapable = isTraceCapable();
     }
 
@@ -301,7 +303,7 @@ public final class Log4jLoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param msg
      *          - the message object to be logged
      */
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         logger.log(FQCN, Level.INFO, msg, null);
     }
 
@@ -378,7 +380,7 @@ public final class Log4jLoggerAdapter extends MarkerIgnoringBase implements Loca
      * @param t
      *          the exception (throwable) to log
      */
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         logger.log(FQCN, Level.INFO, msg, t);
     }
 

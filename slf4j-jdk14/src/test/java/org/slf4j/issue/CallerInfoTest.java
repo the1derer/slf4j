@@ -9,6 +9,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import org.slf4j.helpers.SubstituteServiceProvider;
 import org.slf4j.jul.ListHandler;
 
 public class CallerInfoTest {
-	Level oldLevel;
+	@Nullable Level oldLevel;
 	java.util.logging.Logger root = java.util.logging.Logger.getLogger("");
 
 	ListHandler listHandler = new ListHandler();

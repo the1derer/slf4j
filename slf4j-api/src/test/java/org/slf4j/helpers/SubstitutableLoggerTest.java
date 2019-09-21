@@ -37,6 +37,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.event.EventRecodingLogger;
@@ -78,7 +79,7 @@ public class SubstitutableLoggerTest {
     private class LoggerInvocationHandler implements InvocationHandler {
         private final Set<String> invokedMethodSignatures = new HashSet<String>();
 
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        public @Nullable Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             invokedMethodSignatures.add(getMethodSignature(method));
             if (method.getName().startsWith("is")) {
                 return true;

@@ -26,6 +26,8 @@ package org.slf4j.simple;
 
 import java.io.PrintStream;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 public class SilentPrintStream extends PrintStream {
 
     PrintStream other;
@@ -35,12 +37,12 @@ public class SilentPrintStream extends PrintStream {
         other = ps;
     }
 
-    public void print(String s) {
+    public void print(@Nullable String s) {
     }
 
-    public void println(String s) {
+    public void println(@Nullable String s) {
     }
 
-    public void println(Object x) {
+    public void println(@Nullable Object x) {
     }
 }

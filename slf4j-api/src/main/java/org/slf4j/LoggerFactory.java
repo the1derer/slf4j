@@ -35,6 +35,8 @@ import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.event.SubstituteLoggingEvent;
 import org.slf4j.helpers.NOPServiceProvider;
 import org.slf4j.helpers.SubstituteServiceProvider;
@@ -98,7 +100,7 @@ public final class LoggerFactory {
 
     static boolean DETECT_LOGGER_NAME_MISMATCH = Util.safeGetBooleanSystemProperty(DETECT_LOGGER_NAME_MISMATCH_PROPERTY);
 
-    static volatile SLF4JServiceProvider PROVIDER;
+    static volatile @MonotonicNonNull SLF4JServiceProvider PROVIDER;
 
     private static List<SLF4JServiceProvider> findServiceProviders() {
         ServiceLoader<SLF4JServiceProvider> serviceLoader = ServiceLoader.load(SLF4JServiceProvider.class);
@@ -137,6 +139,7 @@ public final class LoggerFactory {
         INITIALIZATION_STATE = UNINITIALIZED;
     }
 
+    @SuppressWarnings("nullness") // versionSanityCheck() is called only after successful initialization of PROVIDER by bind()
     private final static void performInitialization() {
         bind();
         if (INITIALIZATION_STATE == SUCCESSFUL_INITIALIZATION) {
@@ -247,6 +250,11 @@ public final class LoggerFactory {
         }
     }
 
+    // [ERROR] /mnt/Work/Google_Summer_of_Code/Checker_Framework/CaseStudy/slf4j/slf4j-api/src/main/java/org/slf4j/LoggerFactory.java:[252,90] 
+    // [contracts.precondition.not.satisfied] the called method 'event.getLogger().isDelegateEventAware()' has a precondition 
+    // 'event.getLogger()._delegate' that is not satisfied
+    @SuppressWarnings("nullness") // Code is unsafe, but in here only call to this method is preceded by repalySingleEvent() which will throws IllegalStateException if _delegate is null 
+    // @RequiresNonNull("#1.getLogger()._delegate")
     private static void emitReplayOrSubstituionWarning(SubstituteLoggingEvent event, int queueSize) {
         if (event.getLogger().isDelegateEventAware()) {
             emitReplayWarning(queueSize);
@@ -290,6 +298,7 @@ public final class LoggerFactory {
         Util.report("See also " + REPLAY_URL);
     }
 
+    @RequiresNonNull("PROVIDER")
     private final static void versionSanityCheck() {
         try {
             String requested = PROVIDER.getRequesteApiVersion();
@@ -411,6 +420,7 @@ public final class LoggerFactory {
      * @return provider in use
      * @since 1.8.0
      */
+
     static SLF4JServiceProvider getProvider() {
         if (INITIALIZATION_STATE == UNINITIALIZED) {
             synchronized (LoggerFactory.class) {
@@ -421,8 +431,11 @@ public final class LoggerFactory {
             }
         }
         switch (INITIALIZATION_STATE) {
-        case SUCCESSFUL_INITIALIZATION:
+        case SUCCESSFUL_INITIALIZATION:{
+            assert PROVIDER != null
+            : "@AssumeAssertion(nullness): PROVIDER is always initialized by using performInitialization() or is already initialized";
             return PROVIDER;
+        }
         case NOP_FALLBACK_INITIALIZATION:
             return NOP_FALLBACK_FACTORY;
         case FAILED_INITIALIZATION:

@@ -28,6 +28,9 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.PolyNull;
+
 // contributors: lizongbo: proposed special treatment of array parameter values
 // Joern Huxhorn: pointed out double[] omission, suggested deep array copy
 /**
@@ -120,7 +123,7 @@ final public class MessageFormatter {
      *          The argument to be substituted in place of the formatting anchor
      * @return The formatted message
      */
-    final public static FormattingTuple format(String messagePattern, Object arg) {
+    final public static FormattingTuple format(@Nullable String messagePattern, @Nullable Object arg) {
         return arrayFormat(messagePattern, new Object[] { arg });
     }
 
@@ -147,12 +150,12 @@ final public class MessageFormatter {
      *          anchor
      * @return The formatted message
      */
-    final public static FormattingTuple format(final String messagePattern, Object arg1, Object arg2) {
+    final public static FormattingTuple format(final String messagePattern, @Nullable Object arg1, @Nullable Object arg2) {
         return arrayFormat(messagePattern, new Object[] { arg1, arg2 });
     }
 
 
-    static final Throwable getThrowableCandidate(Object[] argArray) {
+    static final @Nullable Throwable getThrowableCandidate(@Nullable Object @Nullable[] argArray) {
         if (argArray == null || argArray.length == 0) {
             return null;
         }
@@ -164,16 +167,16 @@ final public class MessageFormatter {
         return null;
     }
 
-    final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray) {
-        Throwable throwableCandidate = getThrowableCandidate(argArray);
-        Object[] args = argArray;
+    final public static FormattingTuple arrayFormat(final @Nullable String messagePattern, final @Nullable Object @Nullable[] argArray) {
+        @Nullable Throwable throwableCandidate = getThrowableCandidate(argArray); // returns null if (argArray == null || argArray.length == 0) 
+        @Nullable Object[] args = argArray;
         if (throwableCandidate != null) {
             args = trimmedCopy(argArray);
         }
         return arrayFormat(messagePattern, args, throwableCandidate);
     }
 
-    private static Object[] trimmedCopy(Object[] argArray) {
+    private static @PolyNull Object[] trimmedCopy(@PolyNull Object @Nullable[] argArray) {
         if (argArray == null || argArray.length == 0) {
             throw new IllegalStateException("non-sensical empty or null argument array");
         }
@@ -183,7 +186,7 @@ final public class MessageFormatter {
         return trimmed;
     }
 
-    final public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray, Throwable throwable) {
+    final public static FormattingTuple arrayFormat(final @Nullable String messagePattern, final @Nullable Object @Nullable[] argArray, @Nullable Throwable throwable) {
 
         if (messagePattern == null) {
             return new FormattingTuple(null, argArray, throwable);
@@ -224,13 +227,13 @@ final public class MessageFormatter {
                         // itself escaped: "abc x:\\{}"
                         // we have to consume one backward slash
                         sbuf.append(messagePattern, i, j - 1);
-                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], Object>());
+                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], @Nullable Object>());
                         i = j + 2;
                     }
                 } else {
                     // normal case
                     sbuf.append(messagePattern, i, j);
-                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], Object>());
+                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], @Nullable Object>());  // hash map allows both null value and key
                     i = j + 2;
                 }
             }
@@ -262,7 +265,7 @@ final public class MessageFormatter {
     }
 
     // special treatment of array values was suggested by 'lizongbo'
-    private static void deeplyAppendParameter(StringBuilder sbuf, Object o, Map<Object[], Object> seenMap) {
+    private static void deeplyAppendParameter(StringBuilder sbuf, @Nullable Object o, Map<Object[], @Nullable Object> seenMap) {
         if (o == null) {
             sbuf.append("null");
             return;
@@ -305,7 +308,7 @@ final public class MessageFormatter {
 
     }
 
-    private static void objectArrayAppend(StringBuilder sbuf, Object[] a, Map<Object[], Object> seenMap) {
+    private static void objectArrayAppend(StringBuilder sbuf, Object[] a, Map<Object[], @Nullable Object> seenMap) {
         sbuf.append('[');
         if (!seenMap.containsKey(a)) {
             seenMap.put(a, null);

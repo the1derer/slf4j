@@ -2,6 +2,8 @@ package org.slf4j.simple;
 
 import java.io.PrintStream;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * This class encapsulates the user's choice of output target.
  * 
@@ -15,7 +17,7 @@ class OutputChoice {
     }
 
     final OutputChoiceType outputChoiceType;
-    final PrintStream targetPrintStream;
+    final @Nullable PrintStream targetPrintStream;
 
     OutputChoice(OutputChoiceType outputChoiceType) {
         if (outputChoiceType == OutputChoiceType.FILE) {
@@ -36,7 +38,7 @@ class OutputChoice {
         this.targetPrintStream = printStream;
     }
 
-    PrintStream getTargetPrintStream() {
+    @Nullable PrintStream getTargetPrintStream() {
         switch (outputChoiceType) {
         case SYS_OUT:
             return System.out;

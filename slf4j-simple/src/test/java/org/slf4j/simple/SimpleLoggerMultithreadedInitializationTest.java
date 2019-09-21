@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.After;
 import org.junit.Before;
 import org.slf4j.LoggerFactoryFriend;
@@ -91,19 +92,22 @@ public class SimpleLoggerMultithreadedInitializationTest extends MultithreadedIn
             this(ps, false);
         }
 
-        public void print(String s) {
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
+        public void print(@Nullable String s) {
             if (duplicate)
                 other.print(s);
             stringList.add(s);
         }
 
-        public void println(String s) {
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
+        public void println(@Nullable String s) {
             if (duplicate)
                 other.println(s);
             stringList.add(s);
         }
 
-        public void println(Object o) {
+        @SuppressWarnings("nullness") // Supressing Warnings as adding null value to ArrayList is allowed
+        public void println(@Nullable Object o) {
             if (duplicate)
                 other.println(o);
             stringList.add(o.toString());

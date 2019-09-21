@@ -2,6 +2,7 @@ package org.slf4j.log4j12;
 
 import java.lang.reflect.Method;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.helpers.Util;
 
 public class VersionUtil {
@@ -12,7 +13,8 @@ public class VersionUtil {
         return getJavaMajorVersion(javaVersionString);
     }
 
-    static public int getJavaMajorVersion(String versionString) {
+    @SuppressWarnings("nullness") // Stub file is not being applied
+    static public int getJavaMajorVersion(@Nullable String versionString) {
         if (versionString == null)
             return MINIMAL_VERSION;
         if (versionString.startsWith("1.")) {

@@ -1,5 +1,7 @@
 package org.slf4j.event;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 import org.slf4j.Marker;
 
 /**
@@ -11,7 +13,7 @@ public interface LoggingEvent {
 
     Level getLevel();
 
-    Marker getMarker();
+    @Nullable Marker getMarker();
 
     String getLoggerName();
 
@@ -19,10 +21,10 @@ public interface LoggingEvent {
 
     String getThreadName();
 
-    Object[] getArgumentArray();
+    @PolyNull Object @PolyNull [] getArgumentArray();
 
     long getTimeStamp();
 
-    Throwable getThrowable();
+    @Nullable Throwable getThrowable();
 
 }

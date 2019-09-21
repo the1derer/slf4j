@@ -1,6 +1,10 @@
 package org.slf4j.log4j12;
 
 import org.apache.log4j.Level;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
+import org.checkerframework.framework.qual.EnsuresQualifier;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.IMarkerFactory;
 import org.slf4j.helpers.BasicMarkerFactory;
@@ -8,6 +12,7 @@ import org.slf4j.helpers.Util;
 import org.slf4j.spi.MDCAdapter;
 import org.slf4j.spi.SLF4JServiceProvider;
 
+@SuppressWarnings("nullness") // Suppressing Precondition must be no stronger than in superclass.
 public class Log4j12ServiceProvider implements SLF4JServiceProvider {
 
     /**
@@ -17,9 +22,9 @@ public class Log4j12ServiceProvider implements SLF4JServiceProvider {
     // to avoid constant folding by the compiler, this field must *not* be final
     public static String REQUESTED_API_VERSION = "1.8.99"; // !final
 
-    private ILoggerFactory loggerFactory; 
-    private IMarkerFactory markerFactory; 
-    private MDCAdapter mdcAdapter;
+    private @MonotonicNonNull ILoggerFactory loggerFactory; 
+    private @MonotonicNonNull IMarkerFactory markerFactory; 
+    private @MonotonicNonNull MDCAdapter mdcAdapter;
     
     public Log4j12ServiceProvider() {
         try {
@@ -31,20 +36,26 @@ public class Log4j12ServiceProvider implements SLF4JServiceProvider {
     }
 
     @Override
+    @EnsuresQualifier(expression = "loggerFactory", qualifier = NonNull.class)
+    @EnsuresQualifier(expression = "markerFactory", qualifier = NonNull.class)
+    @EnsuresQualifier(expression = "mdcAdapter", qualifier = NonNull.class)
     public void initialize() {
         loggerFactory = new Log4jLoggerFactory();
         markerFactory = new BasicMarkerFactory();
         mdcAdapter = new Log4jMDCAdapter();
     }
     
+    @RequiresNonNull("loggerFactory")
     public ILoggerFactory getLoggerFactory() {
         return loggerFactory;
     }
 
+    @RequiresNonNull("markerFactory")
     public IMarkerFactory getMarkerFactory() {
         return markerFactory;
     }
 
+    @RequiresNonNull("mdcAdapter")
     public MDCAdapter getMDCAdapter() {
         return mdcAdapter;
     }

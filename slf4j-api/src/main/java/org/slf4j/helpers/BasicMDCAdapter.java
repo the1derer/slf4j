@@ -24,6 +24,7 @@
  */
 package org.slf4j.helpers;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.spi.MDCAdapter;
 
 import java.util.*;
@@ -44,9 +45,9 @@ import java.util.Map;
  */
 public class BasicMDCAdapter implements MDCAdapter {
 
-    private InheritableThreadLocal<Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<Map<String, String>>() {
+    private InheritableThreadLocal<@Nullable Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<@Nullable Map<String, String>>() { // this annonymus class & (Annoated)JDK allows null
         @Override
-        protected Map<String, String> childValue(Map<String, String> parentValue) {
+        protected @Nullable Map<String, String> childValue(@Nullable Map<String, String> parentValue) {
             if (parentValue == null) {
                 return null;
             }
@@ -81,7 +82,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     /**
      * Get the context identified by the <code>key</code> parameter.
      */
-    public String get(String key) {
+    public @Nullable String get(String key) {
         Map<String, String> map = inheritableThreadLocal.get();
         if ((map != null) && (key != null)) {
             return map.get(key);
@@ -117,10 +118,11 @@ public class BasicMDCAdapter implements MDCAdapter {
      *
      * @return the keys in the MDC
      */
-    public Set<String> getKeys() {
+    public @Nullable Set<String> getKeys() {
         Map<String, String> map = inheritableThreadLocal.get();
         if (map != null) {
-            return map.keySet();
+            Set s=map.keySet();
+            return s;
         } else {
             return null;
         }
@@ -131,7 +133,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      * Returned value may be null.
      *
      */
-    public Map<String, String> getCopyOfContextMap() {
+    public @Nullable Map<String, String> getCopyOfContextMap() {
         Map<String, String> oldMap = inheritableThreadLocal.get();
         if (oldMap != null) {
             return new HashMap<String, String>(oldMap);

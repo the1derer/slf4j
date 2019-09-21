@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.helpers.Util;
 import org.slf4j.simple.OutputChoice.OutputChoiceType;
 
@@ -37,10 +38,10 @@ public class SimpleLoggerConfiguration {
     private static final boolean SHOW_DATE_TIME_DEFAULT = false;
     boolean showDateTime = SHOW_DATE_TIME_DEFAULT;
 
-    private static final String DATE_TIME_FORMAT_STR_DEFAULT = null;
-    private static String dateTimeFormatStr = DATE_TIME_FORMAT_STR_DEFAULT;
+    private static final @Nullable String DATE_TIME_FORMAT_STR_DEFAULT = null;
+    private static @Nullable String dateTimeFormatStr = DATE_TIME_FORMAT_STR_DEFAULT;
 
-    DateFormat dateFormatter = null;
+    @Nullable DateFormat dateFormatter = null;
 
     private static final boolean SHOW_THREAD_NAME_DEFAULT = true;
     boolean showThreadName = SHOW_THREAD_NAME_DEFAULT;
@@ -55,14 +56,14 @@ public class SimpleLoggerConfiguration {
     boolean levelInBrackets = LEVEL_IN_BRACKETS_DEFAULT;
 
     private static String LOG_FILE_DEFAULT = "System.err";
-    private String logFile = LOG_FILE_DEFAULT;
-    OutputChoice outputChoice = null;
+    private @Nullable String logFile = LOG_FILE_DEFAULT;
+    @Nullable OutputChoice outputChoice = null;
 
     private static final boolean CACHE_OUTPUT_STREAM_DEFAULT = false;
     private boolean cacheOutputStream = CACHE_OUTPUT_STREAM_DEFAULT;
 
     private static final String WARN_LEVELS_STRING_DEFAULT = "WARN";
-    String warnLevelString = WARN_LEVELS_STRING_DEFAULT;
+    @Nullable String warnLevelString = WARN_LEVELS_STRING_DEFAULT;
 
     private final Properties properties = new Properties();
 
@@ -98,7 +99,7 @@ public class SimpleLoggerConfiguration {
     private void loadProperties() {
         // Add props from the resource simplelogger.properties
         InputStream in = AccessController.doPrivileged(new PrivilegedAction<InputStream>() {
-            public InputStream run() {
+            public @Nullable InputStream run() {
                 ClassLoader threadCL = Thread.currentThread().getContextClassLoader();
                 if (threadCL != null) {
                     return threadCL.getResourceAsStream(CONFIGURATION_FILE);
@@ -122,7 +123,7 @@ public class SimpleLoggerConfiguration {
         }
     }
 
-    String getStringProperty(String name, String defaultValue) {
+    @Nullable String getStringProperty(String name, @Nullable String defaultValue) {
         String prop = getStringProperty(name);
         return (prop == null) ? defaultValue : prop;
     }
@@ -132,7 +133,7 @@ public class SimpleLoggerConfiguration {
         return (prop == null) ? defaultValue : "true".equalsIgnoreCase(prop);
     }
 
-    String getStringProperty(String name) {
+    @Nullable String getStringProperty(String name) {
         String prop = null;
         try {
             prop = System.getProperty(name);
@@ -160,7 +161,7 @@ public class SimpleLoggerConfiguration {
         return SimpleLogger.LOG_LEVEL_INFO;
     }
 
-    private static OutputChoice computeOutputChoice(String logFile, boolean cacheOutputStream) {
+    private static OutputChoice computeOutputChoice(@Nullable String logFile, boolean cacheOutputStream) {
         if ("System.err".equalsIgnoreCase(logFile))
             if (cacheOutputStream)
                 return new OutputChoice(OutputChoiceType.CACHED_SYS_ERR);
@@ -173,9 +174,13 @@ public class SimpleLoggerConfiguration {
                 return new OutputChoice(OutputChoiceType.SYS_OUT);
         } else {
             try {
-                FileOutputStream fos = new FileOutputStream(logFile);
-                PrintStream printStream = new PrintStream(fos);
+                if(logFile != null) { // Error if possible null value of logFile
+                    FileOutputStream fos = new FileOutputStream(logFile);
+                    PrintStream printStream = new PrintStream(fos);
                 return new OutputChoice(printStream);
+                }
+                else 
+                    return new OutputChoice(OutputChoiceType.SYS_ERR);
             } catch (FileNotFoundException e) {
                 Util.report("Could not open [" + logFile + "]. Defaulting to System.err", e);
                 return new OutputChoice(OutputChoiceType.SYS_ERR);

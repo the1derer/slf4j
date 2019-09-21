@@ -27,6 +27,11 @@ package org.slf4j.simple;
 import java.io.PrintStream;
 import java.util.Date;
 
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.Logger;
 import org.slf4j.event.LoggingEvent;
 import org.slf4j.helpers.FormattingTuple;
@@ -157,7 +162,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     protected static final int LOG_LEVEL_OFF = LOG_LEVEL_ERROR + 10;
 
     private static boolean INITIALIZED = false;
-    static SimpleLoggerConfiguration CONFIG_PARAMS = null;
+    static @MonotonicNonNull SimpleLoggerConfiguration CONFIG_PARAMS = null;
 
     static void lazyInit() {
         if (INITIALIZED) {
@@ -169,6 +174,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
 
     // external software might be invoking this method directly. Do not rename
     // or change its semantics.
+    @EnsuresNonNull("CONFIG_PARAMS")
     static void init() {
         CONFIG_PARAMS = new SimpleLoggerConfiguration();
         CONFIG_PARAMS.init();
@@ -177,7 +183,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     /** The current log level */
     protected int currentLogLevel = LOG_LEVEL_INFO;
     /** The short name of this simple log instance */
-    private transient String shortLogName = null;
+    private transient @MonotonicNonNull String shortLogName = null;
 
     /**
      * All system properties used by <code>SimpleLogger</code> start with this
@@ -211,8 +217,9 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * Package access allows only {@link SimpleLoggerFactory} to instantiate
      * SimpleLogger instances.
      */
+    @RequiresNonNull("CONFIG_PARAMS")
     SimpleLogger(String name) {
-        this.name = name;
+        super(name);
 
         String levelString = recursivelyComputeLevelString();
         if (levelString != null) {
@@ -222,12 +229,15 @@ public class SimpleLogger extends MarkerIgnoringBase {
         }
     }
 
-    String recursivelyComputeLevelString() {
+    @RequiresNonNull({"name"})
+    @Nullable String recursivelyComputeLevelString(@UnknownInitialization SimpleLogger this) {
         String tempName = name;
         String levelString = null;
         int indexOfLastDot = tempName.length();
         while ((levelString == null) && (indexOfLastDot > -1)) {
             tempName = tempName.substring(0, indexOfLastDot);
+            assert CONFIG_PARAMS != null
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after initialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
             levelString = CONFIG_PARAMS.getStringProperty(SimpleLogger.LOG_KEY_PREFIX + tempName, null);
             indexOfLastDot = String.valueOf(tempName).lastIndexOf(".");
         }
@@ -245,12 +255,15 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * @param t
      *            The exception whose stack trace should be logged
      */
-    private void log(int level, String message, Throwable t) {
+    private void log(int level, @Nullable String message, @Nullable Throwable t) {
         if (!isLevelEnabled(level)) {
             return;
         }
 
         StringBuilder buf = new StringBuilder(32);
+
+        assert CONFIG_PARAMS != null
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after initialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
 
         // Append date-time if so configured
         if (CONFIG_PARAMS.showDateTime) {
@@ -296,7 +309,8 @@ public class SimpleLogger extends MarkerIgnoringBase {
 
     }
 
-    protected String renderLevel(int level) {
+    @RequiresNonNull({"CONFIG_PARAMS"})
+    protected @Nullable String renderLevel(int level) {
         switch (level) {
         case LOG_LEVEL_TRACE:
             return "TRACE";
@@ -312,20 +326,26 @@ public class SimpleLogger extends MarkerIgnoringBase {
         throw new IllegalStateException("Unrecognized level [" + level + "]");
     }
 
-    void write(StringBuilder buf, Throwable t) {
+    @RequiresNonNull({"CONFIG_PARAMS"})
+    void write(StringBuilder buf, @Nullable Throwable t) {
+        assert CONFIG_PARAMS.outputChoice != null
+            : "@AssumeAssertion(nullness): Since all the instances of SimpleLogger is initiated be SimpleLoggerFactory which calls lazyinit() during just after initialization which Ensures non null value of CONFIG_PARAMS.outputChoice";
         PrintStream targetStream = CONFIG_PARAMS.outputChoice.getTargetPrintStream();
+        assert targetStream != null
+            : "@AssumeAssertion(nullness):computeOutputChoice() will only initialize outputChoice with outputChoice.getTargetPrintStream() only returning @NonNull value";
 
         targetStream.println(buf.toString());
         writeThrowable(t, targetStream);
         targetStream.flush();
     }
 
-    protected void writeThrowable(Throwable t, PrintStream targetStream) {
+    protected void writeThrowable(@Nullable Throwable t, PrintStream targetStream) {
         if (t != null) {
             t.printStackTrace(targetStream);
         }
     }
 
+    @RequiresNonNull({"CONFIG_PARAMS","CONFIG_PARAMS.dateFormatter"})
     private String getFormattedDate() {
         Date now = new Date();
         String dateText;
@@ -347,7 +367,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * @param arg1
      * @param arg2
      */
-    private void formatAndLog(int level, String format, Object arg1, Object arg2) {
+    private void formatAndLog(int level, String format, Object arg1, @Nullable Object arg2) {
         if (!isLevelEnabled(level)) {
             return;
         }
@@ -363,7 +383,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * @param arguments
      *            a list of 3 ore more arguments
      */
-    private void formatAndLog(int level, String format, Object... arguments) {
+    private void formatAndLog(int level, String format, @Nullable Object... arguments) {
         if (!isLevelEnabled(level)) {
             return;
         }
@@ -434,7 +454,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which logs messages of level DEBUG according to
      * the format outlined above.
      */
-    public void debug(String msg) {
+    public void debug(@Nullable String msg) {
         log(LOG_LEVEL_DEBUG, msg, null);
     }
 
@@ -463,7 +483,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level DEBUG, including an exception. */
-    public void debug(String msg, Throwable t) {
+    public void debug(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_DEBUG, msg, t);
     }
 
@@ -476,7 +496,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which logs messages of level INFO according to
      * the format outlined above.
      */
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         log(LOG_LEVEL_INFO, msg, null);
     }
 
@@ -500,12 +520,12 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * Perform double parameter substitution before logging the message of level
      * INFO according to the format outlined above.
      */
-    public void info(String format, Object... argArray) {
+    public void info(String format, @Nullable Object... argArray) {
         formatAndLog(LOG_LEVEL_INFO, format, argArray);
     }
 
     /** Log a message of level INFO, including an exception. */
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_INFO, msg, t);
     }
 
@@ -518,7 +538,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which always logs messages of level WARN
      * according to the format outlined above.
      */
-    public void warn(String msg) {
+    public void warn(@Nullable String msg) {
         log(LOG_LEVEL_WARN, msg, null);
     }
 
@@ -547,7 +567,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level WARN, including an exception. */
-    public void warn(String msg, Throwable t) {
+    public void warn(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_WARN, msg, t);
     }
 
@@ -560,7 +580,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
      * A simple implementation which always logs messages of level ERROR
      * according to the format outlined above.
      */
-    public void error(String msg) {
+    public void error(@Nullable String msg) {
         log(LOG_LEVEL_ERROR, msg, null);
     }
 
@@ -589,7 +609,7 @@ public class SimpleLogger extends MarkerIgnoringBase {
     }
 
     /** Log a message of level ERROR, including an exception. */
-    public void error(String msg, Throwable t) {
+    public void error(@Nullable String msg, Throwable t) {
         log(LOG_LEVEL_ERROR, msg, t);
     }
 

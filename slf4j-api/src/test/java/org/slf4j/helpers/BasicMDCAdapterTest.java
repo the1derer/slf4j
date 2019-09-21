@@ -32,6 +32,7 @@ import static org.junit.Assert.fail;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.After;
 import org.junit.Test;
 import org.slf4j.spi.MDCAdapter;
@@ -65,6 +66,7 @@ public class BasicMDCAdapterTest {
     }
 
     @Test
+    @SuppressWarnings("nullness") // False Positive- As without using mdc.clear(), mdc.getCopyOfContextMap() will never be null
     public void testClearingMDC() {
         mdc.put("testKey", "testValue");
         assertFalse(mdc.getCopyOfContextMap().isEmpty());
@@ -73,6 +75,7 @@ public class BasicMDCAdapterTest {
     }
 
     @Test
+    @SuppressWarnings("nullness") // False Positive- As without using mdc.clear(), mdc.getCopyOfContextMap() will never be null
     public void testGetCopyOfContextMapFromMDC() {
         mdc.put("testKey", "testValue");
         Map<String, String> copy = mdc.getCopyOfContextMap();
@@ -131,7 +134,7 @@ public class BasicMDCAdapterTest {
 
     /** A {@link UncaughtExceptionHandler} that records whether the thread threw an exception. */
     private static class RecordingExceptionHandler implements UncaughtExceptionHandler {
-        private Throwable exception;
+        private @Nullable Throwable exception;
 
         public void uncaughtException(Thread t, Throwable e) {
             exception = e;
@@ -141,7 +144,7 @@ public class BasicMDCAdapterTest {
             return exception != null;
         }
 
-        String getMessage() {
+        @Nullable String getMessage() {
             return exception != null ? exception.getMessage() : "";
         }
     }

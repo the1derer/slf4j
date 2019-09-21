@@ -2,6 +2,7 @@ package org.slf4j.event;
 
 import java.util.Queue;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.helpers.SubstituteLogger;
@@ -22,11 +23,11 @@ public class EventRecodingLogger implements Logger {
         return name;
     }
 
-    private void recordEvent(Level level, String msg, Object[] args, Throwable throwable) {
+    private void recordEvent(Level level, @Nullable String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) {
         recordEvent(level, null, msg, args, throwable);
     }
 
-    private void recordEvent(Level level, Marker marker, String msg, Object[] args, Throwable throwable) {
+    private void recordEvent(Level level, @Nullable Marker marker, @Nullable String msg, @Nullable Object @Nullable [] args, @Nullable Throwable throwable) {
         // System.out.println("recording logger:"+name+", msg:"+msg);
         SubstituteLoggingEvent loggingEvent = new SubstituteLoggingEvent();
         loggingEvent.setTimeStamp(System.currentTimeMillis());
@@ -95,7 +96,7 @@ public class EventRecodingLogger implements Logger {
         return true;
     }
 
-    public void debug(String msg) {
+    public void debug(@Nullable String msg) {
         recordEvent(Level.DEBUG, msg, null, null);
     }
 
@@ -113,7 +114,7 @@ public class EventRecodingLogger implements Logger {
         recordEvent(Level.DEBUG, format, arguments, null);
     }
 
-    public void debug(String msg, Throwable t) {
+    public void debug(@Nullable String msg, Throwable t) {
         recordEvent(Level.DEBUG, msg, null, t);
     }
 
@@ -145,7 +146,7 @@ public class EventRecodingLogger implements Logger {
         return true;
     }
 
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         recordEvent(Level.INFO, msg, null, null);
     }
 
@@ -161,7 +162,7 @@ public class EventRecodingLogger implements Logger {
         recordEvent(Level.INFO, format, arguments, null);
     }
 
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         recordEvent(Level.INFO, msg, null, t);
     }
 
@@ -194,7 +195,7 @@ public class EventRecodingLogger implements Logger {
         return true;
     }
 
-    public void warn(String msg) {
+    public void warn(@Nullable String msg) {
         recordEvent(Level.WARN, msg, null, null);
     }
 
@@ -211,7 +212,7 @@ public class EventRecodingLogger implements Logger {
         recordEvent(Level.WARN, format, arguments, null);
     }
 
-    public void warn(String msg, Throwable t) {
+    public void warn(@Nullable String msg, Throwable t) {
         recordEvent(Level.WARN, msg, null, t);
     }
 
@@ -244,7 +245,7 @@ public class EventRecodingLogger implements Logger {
         return true;
     }
 
-    public void error(String msg) {
+    public void error(@Nullable String msg) {
         recordEvent(Level.ERROR, msg, null, null);
     }
 
@@ -263,7 +264,7 @@ public class EventRecodingLogger implements Logger {
 
     }
 
-    public void error(String msg, Throwable t) {
+    public void error(@Nullable String msg, Throwable t) {
         recordEvent(Level.ERROR, msg, null, t);
     }
 

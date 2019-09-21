@@ -24,6 +24,7 @@
  */
 package org.slf4j.jul;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,7 +47,7 @@ import static org.junit.Assert.fail;
  */
 public class InvocationTest {
 
-    Level oldLevel;
+    @Nullable Level oldLevel;
     java.util.logging.Logger root = java.util.logging.Logger.getLogger("");
 
     ListHandler listHandler = new ListHandler();

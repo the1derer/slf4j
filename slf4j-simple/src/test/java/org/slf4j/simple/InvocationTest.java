@@ -91,6 +91,7 @@ public class InvocationTest {
     // http://jira.qos.ch/browse/SLF4J-69
     // formerly http://bugzilla.slf4j.org/show_bug.cgi?id=78
     @Test
+    @SuppressWarnings("nullness") // -> To be solved: Suppressing Waring till find a way to annotate Variable length argument
     public void testNullParameter_BUG78() {
         Logger logger = LoggerFactory.getLogger("testNullParameter_BUG78");
         String[] parameters = null;

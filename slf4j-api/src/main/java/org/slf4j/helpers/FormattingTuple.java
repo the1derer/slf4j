@@ -24,6 +24,8 @@
  */
 package org.slf4j.helpers;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * Holds the results of formatting done by {@link MessageFormatter}.
  * 
@@ -33,29 +35,29 @@ public class FormattingTuple {
 
     static public FormattingTuple NULL = new FormattingTuple(null);
 
-    private String message;
-    private Throwable throwable;
-    private Object[] argArray;
+    private @Nullable String message;
+    private @Nullable Throwable throwable;
+    private @Nullable Object @Nullable [] argArray;
 
-    public FormattingTuple(String message) {
+    public FormattingTuple(@Nullable String message) {
         this(message, null, null);
     }
 
-    public FormattingTuple(String message, Object[] argArray, Throwable throwable) {
+    public FormattingTuple(@Nullable String message, @Nullable Object @Nullable [] argArray, @Nullable Throwable throwable) {
         this.message = message;
         this.throwable = throwable;
         this.argArray = argArray;
     }
 
-    public String getMessage() {
+    public @Nullable String getMessage() { 
         return message;
     }
 
-    public Object[] getArgArray() {
+    public @Nullable Object @Nullable [] getArgArray() {
         return argArray;
     }
 
-    public Throwable getThrowable() {
+    public @Nullable Throwable getThrowable() {
         return throwable;
     }
 

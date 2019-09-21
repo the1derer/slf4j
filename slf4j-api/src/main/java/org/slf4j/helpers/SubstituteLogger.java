@@ -28,6 +28,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Queue;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.EnsuresNonNullIf;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.event.EventRecodingLogger;
@@ -47,15 +52,15 @@ import org.slf4j.event.SubstituteLoggingEvent;
 public class SubstituteLogger implements Logger {
 
     private final String name;
-    private volatile Logger _delegate;
-    private Boolean delegateEventAware;
-    private Method logMethodCache;
-    private EventRecodingLogger eventRecodingLogger;
-    private Queue<SubstituteLoggingEvent> eventQueue;
+    private volatile @MonotonicNonNull Logger _delegate;
+    private @MonotonicNonNull Boolean delegateEventAware;
+    private @MonotonicNonNull Method logMethodCache;
+    private @MonotonicNonNull EventRecodingLogger eventRecodingLogger; // Initialized by getEventRecordingLogger()
+    private @Nullable Queue<SubstituteLoggingEvent> eventQueue;
 
     public final boolean createdPostInitialization;
     
-    public SubstituteLogger(String name, Queue<SubstituteLoggingEvent> eventQueue, boolean createdPostInitialization) {
+    public SubstituteLogger(String name, @Nullable Queue<SubstituteLoggingEvent> eventQueue, boolean createdPostInitialization) {
         this.name = name;
         this.eventQueue = eventQueue;
         this.createdPostInitialization = createdPostInitialization;
@@ -117,7 +122,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isDebugEnabled();
     }
 
-    public void debug(String msg) {
+    public void debug(@Nullable String msg) {
         delegate().debug(msg);
     }
 
@@ -133,7 +138,7 @@ public class SubstituteLogger implements Logger {
         delegate().debug(format, arguments);
     }
 
-    public void debug(String msg, Throwable t) {
+    public void debug(@Nullable String msg, Throwable t) {
         delegate().debug(msg, t);
     }
 
@@ -165,7 +170,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isInfoEnabled();
     }
 
-    public void info(String msg) {
+    public void info(@Nullable String msg) {
         delegate().info(msg);
     }
 
@@ -181,7 +186,7 @@ public class SubstituteLogger implements Logger {
         delegate().info(format, arguments);
     }
 
-    public void info(String msg, Throwable t) {
+    public void info(@Nullable String msg, Throwable t) {
         delegate().info(msg, t);
     }
 
@@ -213,7 +218,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isWarnEnabled();
     }
 
-    public void warn(String msg) {
+    public void warn(@Nullable String msg) {
         delegate().warn(msg);
     }
 
@@ -229,7 +234,7 @@ public class SubstituteLogger implements Logger {
         delegate().warn(format, arguments);
     }
 
-    public void warn(String msg, Throwable t) {
+    public void warn(@Nullable String msg, Throwable t) {
         delegate().warn(msg, t);
     }
 
@@ -261,7 +266,7 @@ public class SubstituteLogger implements Logger {
         return delegate().isErrorEnabled();
     }
 
-    public void error(String msg) {
+    public void error(@Nullable String msg) {
         delegate().error(msg);
     }
 
@@ -277,7 +282,7 @@ public class SubstituteLogger implements Logger {
         delegate().error(format, arguments);
     }
 
-    public void error(String msg, Throwable t) {
+    public void error(@Nullable String msg, Throwable t) {
         delegate().error(msg, t);
     }
 
@@ -306,7 +311,7 @@ public class SubstituteLogger implements Logger {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -340,6 +345,10 @@ public class SubstituteLogger implements Logger {
         }
     }
 
+    // [ERROR]/slf4j-api/src/main/java/org/slf4j/helpers/SubstituteLogger.java:[351,65] [argument.type.incompatible] incompatible types in argument.
+    // found   : @Initialized @Nullable Queue<@Initialized @NonNull SubstituteLoggingEvent>
+    // required: @Initialized @NonNull Queue<@Initialized @NonNull SubstituteLoggingEvent>
+    @SuppressWarnings("nullness") // -> To be solved
     private Logger getEventRecordingLogger() {
         if (eventRecodingLogger == null) {
             eventRecodingLogger = new EventRecodingLogger(this, eventQueue);
@@ -351,10 +360,12 @@ public class SubstituteLogger implements Logger {
      * Typically called after the {@link org.slf4j.LoggerFactory} initialization phase is completed.
      * @param delegate
      */
+    @EnsuresNonNull("_delegate")
     public void setDelegate(Logger delegate) {
         this._delegate = delegate;
     }
 
+    @RequiresNonNull("_delegate")
     public boolean isDelegateEventAware() {
         if (delegateEventAware != null)
             return delegateEventAware;
@@ -368,10 +379,13 @@ public class SubstituteLogger implements Logger {
         return delegateEventAware;
     }
 
+    @RequiresNonNull({"_delegate"})
     public void log(LoggingEvent event) {
         if (isDelegateEventAware()) {
             try {
-                logMethodCache.invoke(_delegate, event);
+                assert logMethodCache != null
+                    : "@AssumeAssertion(nullness): isDelegateEventAware() will ensure execution of statement only if logMethodCache is NonNull";
+                logMethodCache.invoke(_delegate, event);                
             } catch (IllegalAccessException e) {
             } catch (IllegalArgumentException e) {
             } catch (InvocationTargetException e) {
@@ -380,6 +394,7 @@ public class SubstituteLogger implements Logger {
     }
 
 
+    @EnsuresNonNullIf(expression="this._delegate", result=false)
     public boolean isDelegateNull() {
         return _delegate == null;
     }

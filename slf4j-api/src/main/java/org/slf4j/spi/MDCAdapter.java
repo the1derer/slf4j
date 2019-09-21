@@ -26,6 +26,8 @@ package org.slf4j.spi;
 
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * This interface abstracts the service offered by various MDC
  * implementations.
@@ -52,7 +54,7 @@ public interface MDCAdapter {
      * 
      * @return the string value identified by the <code>key</code> parameter.
      */
-    public String get(String key);
+    public @Nullable String get(String key);
 
     /**
      * Remove the the context identified by the <code>key</code> parameter. 
@@ -76,7 +78,7 @@ public interface MDCAdapter {
      * @return A copy of the current thread's context map. May be null.
      * @since 1.5.1
      */
-    public Map<String, String> getCopyOfContextMap();
+    public @Nullable Map<String, String> getCopyOfContextMap();
 
     /**
      * Set the current thread's context map by first clearing any existing 
